@@ -1,9 +1,10 @@
-package com.ts.mvc.module.user;
+package com.ts.mvc.infra.util.file.diary;
 
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.hibernate.annotations.ColumnDefault;
@@ -12,6 +13,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -19,22 +21,22 @@ import lombok.NoArgsConstructor;
 @DynamicInsert // insert 쿼리를 생성할 때 null인 필드는 쿼리에서 생략
 @DynamicUpdate // entity에서 변경이 발견되지 않은 값은 쿼리에서 생략
 @Builder @NoArgsConstructor @AllArgsConstructor @Getter
-public class User {
-	
-	@Id
-	private String email;
+@EqualsAndHashCode
+public class DiaryFilePath {
 
-	private String userName;
-	private String password;	
-	private String tell;
+	@Id
+	@GeneratedValue
+	private Long fpIdx;
 	
-	@ColumnDefault("false")
-	private Boolean isLeave;
+	private String originFileName;
+	private String renameFileName;
+	private String savePath;
 	
 	@Column(columnDefinition = "timestamp default now()")
 	private LocalDateTime regDate;
 	
-	private String profilePhoto;
+	@ColumnDefault("false")
+	private Boolean isDel;
 	
-	private String address;
+	private String groupName;
 }
