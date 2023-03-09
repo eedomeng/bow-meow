@@ -38,7 +38,7 @@ public class Pet {
 	private String petBirthdate;
 	private String breed;
 	private String petNumber;
-	private String character;
+	private String petCharacter;
 	
 	private Boolean gender;
 	private Boolean isNeutered;

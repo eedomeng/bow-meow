@@ -9,11 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import com.ts.mvc.infra.util.file.badge.BadgeFilePath;
 import com.ts.mvc.module.user.User;
 
 import lombok.AllArgsConstructor;
@@ -25,14 +23,20 @@ import lombok.NoArgsConstructor;
 @DynamicInsert // insert 쿼리를 생성할 때 null인 필드는 쿼리에서 생략
 @DynamicUpdate // entity에서 변경이 발견되지 않은 값은 쿼리에서 생략
 @Builder @NoArgsConstructor @AllArgsConstructor @Getter
-public class Badge {
+public class UserBadge {
 	
 	@Id
 	@GeneratedValue
-	private Long badgeIdx;
+	public Long getIdx;
 	
-	private String quest;
-//	private BadgeFilePath file;
+	@ManyToOne
+	@JoinColumn(name = "email")
+	private User user;
 	
+	@ManyToOne
+	@JoinColumn(name = "badge_idx")
+	private Badge badge;
 	
+	@Column(columnDefinition = "timestamp default now()")
+	private LocalDateTime regDate;
 }
