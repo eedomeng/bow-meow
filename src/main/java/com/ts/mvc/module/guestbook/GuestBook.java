@@ -29,15 +29,15 @@ public class GuestBook {
 	@GeneratedValue
 	private Long gbIdx;
 	
-	private String userName;
 	private String content;
-	private String profilePhoto;
 	
 	@Column(columnDefinition = "timestamp default now()")
 	private LocalDateTime regDate;
 	
 	@ManyToOne
-	@JoinColumn(name = "email")
-	private User user;
+	private User user; // 수신자
+	
+	@ManyToOne
+	private User host; // 발신자
 	
 }

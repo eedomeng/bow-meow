@@ -1,14 +1,19 @@
 package com.ts.mvc.module.user;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+
+import com.ts.mvc.infra.util.badge.Badge;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,4 +42,8 @@ public class User {
 	private String profilePhoto;
 	
 	private String address;
+	
+	@OneToMany
+	@Builder.Default
+	private List<Badge> badges = new ArrayList<>();
 }
