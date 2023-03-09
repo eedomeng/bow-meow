@@ -14,6 +14,7 @@ public class UserController {
 	
 	@GetMapping("signup")
 	public String signup() {
+		System.out.println("ldm");
 		return "/html/signup";
 	}
 
