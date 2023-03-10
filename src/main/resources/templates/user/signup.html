@@ -21,8 +21,8 @@
   data-template="vertical-menu-template-free"
   
   xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{layout}"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}"
 >
   <head>
     
@@ -101,17 +101,18 @@
               <h4 class="mb-2">Adventure starts here 🚀</h4>
               <p class="mb-4">Make your app management easy and fun!</p>
 
-              <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+				<form th:action="@{/user/signup}" method="post" id="frmJoin" th:object="${signUpRequest}">
                 <div class="mb-3">
-                  <label for="userID" class="form-label">User ID</label>
+                  <label for="email" class="form-label">User EMAIL</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="userid"
-                    name="userid"
+                    id="inpEmail"
+                    name="email"
                     placeholder="test@gmail.com"
                     autofocus/>
-                    <button type="button" class="btn btn-outline-success btn-sm" id="btn-update">ID 중복확인</button>
+                    <button type="button" class="btn btn-outline-success btn-sm" id="btnEmailCheck">EMAIL 중복확인</button>
+                    <span class="valid_info" id="emailCheck"></span>
                 </div>
                 <div class="mb-3 form-password-toggle">
                   <label class="form-label" for="password">Password</label>
@@ -124,6 +125,7 @@
                       placeholder="영문+숫자+특수기호 8자리 이상"
                       aria-describedby="password"/>
                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" id="pw_confirm" class="valid_info"></span>
                   </div>
                 </div>
                 <div class="mb-3">
@@ -131,18 +133,20 @@
                   <input
                     type="text"
                     class="form-control"
-                    id="username"
-                    name="username"
+                    id="userName"
+                    name="userName"
                     placeholder="Enter your username"
                     autofocus/>
+                    <span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" class="valid_info"></span>
                 </div>
                 <div class="mb-3">
                   <label for="phonenumber" class="form-label">Phone number</label>
                   <input type="text"
                   class="form-control"
-                  id="phonenumber"
-                  name="phonenumber"
+                  id="tell"
+                  name="tell"
                   placeholder="Enter your phonenumber" />
+                  <span th:if="${#fields.hasErrors('tell')}" th:errors="*{tell}" class="valid_info"></span>
                 </div>
                 <div class="mb-3">
                   <div class="form-check">
@@ -153,21 +157,61 @@
                     </label>
                   </div>
                 </div>
-                <button class="btn btn-primary d-grid w-100">Sign up</button>
-              </form>
-
+                <input type="submit" value="가입" class="btn btn-primary d-grid w-100">Sign up</input>
+              
               <p class="text-center">
                 <span>Already have an account?</span>
                 <a href="/user/login">
                   <span>Sign in</span>
                 </a>
               </p>
+              
+              </form>
+
+              
             </div>
           </div>
           <!-- Register Card -->
         </div>
       </div>
     </div>
+
+<script type="text/javascript" layout:fragment="script">
+ 
+	 let emailCheckFlg = false;
+	 
+	 btnEmailCheck.addEventListener("click", ev => {
+	
+	  let email = inpEmail.value;
+	  
+	  if(email){
+	   
+	   fetch("/user/checkId?email=" + email)
+	   .then(response => response.json())
+	   .then(obj => {
+		   if(obj.exist){
+			   emailCheck.innerHTML = '이미 존재하는 이메일 입니다.';
+			   emailCheckFlg = false;
+			   return;
+		   }
+		   
+		   emailCheck.innerHTML = '사용 가능한 아이디 입니다.';
+		   emailCheckFlg = true;
+		   
+	   });
+	  }
+	 })
+	 
+	 frmJoin.addEventListener('submit', ev => {
+	  if(!emailCheckFlg){
+	   ev.preventDefault();
+	   alert("아이디 중복검사에 실패했습니다.");
+	   inpEmail.focus();   
+	  }
+	  
+	 })
+ 
+ </script>
 
   </body>
 </html>

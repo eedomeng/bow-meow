@@ -138,17 +138,18 @@
               <h4 class="mb-2">Welcome to Sneat! 👋</h4>
               <p class="mb-4">Please sign-in to your account and start the adventure</p>
 
-              <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+              <form action="/user/login" method="post" th:object="${loginRequest}">
                 <div class="mb-3">
                   <label for="userid" class="form-label">UserId</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="userid"
-                    name="email-username"
+                    id="email"
+                    name="email"
                     placeholder="Enter your UserId"
                     autofocus
                   />
+                  
                 </div>
                 <div class="mb-3 form-password-toggle">
                   <div class="d-flex justify-content-between">
@@ -168,6 +169,7 @@
                     />
                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                   </div>
+                  
                 </div>
                 <div class="mb-3">
                   <div class="form-check">
