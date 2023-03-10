@@ -61,10 +61,6 @@ public class BlogController {
    public String status() {
       return "/html/status";
    }
-   
-      
-   
-   
 
    
 
