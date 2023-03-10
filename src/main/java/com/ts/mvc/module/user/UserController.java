@@ -32,6 +32,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping("user")
 @AllArgsConstructor
 public class UserController {
+
 	
 	private final SignUpValidator signUpValidator;
 	private final UserService userService;
