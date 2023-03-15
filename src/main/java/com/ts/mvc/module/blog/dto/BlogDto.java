@@ -5,16 +5,18 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class Blog {
+public class BlogDto {
 
 	private String water;
 	private String food;
 	private String weight;
+	private String totalDistance;
 	
-	public Blog(String water, String food, String weight) {
+	public BlogDto(String water, String food, String weight, String totalDistance) {
 		this.water = water;
 		this.food = food;
 		this.weight = weight;
+		this.totalDistance = totalDistance;
 	}
 	
 	
@@ -26,7 +28,8 @@ public class Blog {
 	public String toString() {
 		return "{ water :" + water + "\" + "
 				+ "food :" + food + "\" +"
-						+ "weight :" + weight + "}";
+						+ "weight :" + weight + "\" +"
+								+ "totalDistance :" +  totalDistance + "}";
 	}
 	
 }

@@ -1,5 +1,28 @@
 
 
+function postData() {
+
+  let td = (totalDistance.toFixed(2)).toString();
+
+  const data = { TTD: td };
+
+  fetch('http://localhost:8080/blog', {
+    method: 'POST', // 또는 'PUT'
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('성공:', data);
+    })
+    .catch((error) => {
+      console.error('실패:', error);
+    });
+
+
+}
 
 
 
@@ -21,7 +44,7 @@ window.onload = () => {
 
   // 일일 권장 식사량
   let RAOF = ((parseInt(weight) * 1000) * 0.02);
-  console.log(RAOF);
+  // console.log(RAOF);
 
   // 차트생성
   var chart = c3.generate({
@@ -140,25 +163,79 @@ window.onload = () => {
   init();
 
 
+
 } // window.onload end
 
+
+
+
+
+
+// ======================전역변수
 
 
 // 타이머
 var time = 0;
 var running = 0;  // 0은 멈춤, 1은 실행중
 var timerid = 0;
-// var intervalid = 0;
 let walking;
 
-function test() {
+
+
+
+
+
+
+
+// kakao maps
+function kakaoMapsRender() {
+  var container = document.getElementById('map');
+  var options = {
+    center: new kakao.maps.LatLng(currentLatitude, currentLongtitude),
+    level: 3
+  };
+
+  var map = new kakao.maps.Map(container, options);
+
+  // 마커가 표시될 위치입니다 
+  var markerPosition = new kakao.maps.LatLng(currentLatitude, currentLongtitude);
+
+  // 마커를 생성합니다
+  var marker = new kakao.maps.Marker({
+    position: markerPosition
+  });
+
+  // 마커가 지도 위에 표시되도록 설정합니다
+  marker.setMap(map);
+
+  // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+  // marker.setMap(null);    
+}
+
+
+
+//산책거리를 렌더링
+function resultMap() {
+}
+
+
+
+
+
+
+
+function realtimeCalculator() {
   // 10초마다 locationCalculator 호출
   walking = setInterval(() => {
-    locationCalculator()
+    locationCalculator();
+    kakaoMapsRender();
   }, 3000);
 }
 
+
 function startPause() {
+
+
 
   if (running == 0) {
 
@@ -170,12 +247,11 @@ function startPause() {
     document.getElementById("startPause").style.backgroundColor = "red";
     document.getElementById("startPause").style.borderColor = "red";
 
-    test();
-
+    // realtimeCalculator 인터벌 호출
+    realtimeCalculator();
   }
   else {
     //일시정시버튼
-
     running = 0;
     console.log('일시정지!!');
     clearTimeout(timerid);
@@ -200,7 +276,7 @@ function startPause() {
   }
 }
 
-//산책시간 업데이트 
+//산책시간 업데이트  record로 바꾸기 or 아예 없애기 
 function update() {
 
   // 시 분 초 받아와서 초 단위로 합한 값을 세션에 저장, DB로 전달
@@ -226,7 +302,16 @@ function reset() {
   document.getElementById("startPause").style.backgroundColor = "green";
   document.getElementById("startPause").style.borderColor = "green";
 
-  console.log(`산책거리는 ${totalDistance} 입니다.`);
+  console.log(`산책거리는 ${totalDistance.toFixed(2)} Km입니다.`);
+
+  // 산책 거리가 표시될 지도
+  // resultMap();
+
+
+  postData();
+
+
+
 }
 
 //타이머 시간측정 
@@ -258,9 +343,6 @@ function increment() {
 
 
 
-
-
-
 // 시작 위경도, 처음 값을 받은 후로 사용되지 않음
 let startLatitude = 0;
 let startLogntitude = 0;
@@ -273,38 +355,46 @@ let previousLongitude = 0;
 let currentLatitude = 0;
 let currentLongtitude = 0;
 
+
 // 총거리
-let totalDistance = 0;
+var totalDistance = 0;
+
+// 두 점간 거리
+let dist = 0;
 
 
-let dummylati = 37.5179690;
-let dummylongti = 126.857308;
+// 좌표 조작을 위한 테스트 변수
+var i = 0;
+
+// 좌표를 담을 배열
+const latiArr = [];
+const longtiArr = [];
 
 
 
 
-
-
-
-
-// 이동거리 계산 함수, 이전 위경도값과 현재위경도값을 매개변수로 받아서 두 위경도 사이의 거리를 측정.
-function calDistance(previousLatitude, previousLongitude, dummylati, dummylongti) {
-  let theta = (previousLongitude - dummylongti);
-  dist = Math.sin(degTorad(previousLatitude)) * Math.sin(degTorad(dummylati)) + Math.cos(degTorad(previousLatitude)) * Math.cos(degTorad(dummylati)) * Math.cos(degTorad(theta));
+// 두 좌표간 거리 계산 함수
+function calDistance(lat1, lon1, lat2, lon2) {
+  var theta = lon1 - lon2;
+  dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1))
+    * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
   dist = Math.acos(dist);
-  dist = radTodeg(dist);
+  dist = rad2deg(dist);
   dist = dist * 60 * 1.1515;
-  dist = dist * 1.609344;  // 키로미터로 변환 1mile == 1.609344km
-  console.log('dist : ' + dist);
+  dist = dist * 1.609344;
+
+  console.log('좌표간 이동거리= ' + dist.toFixed(2));
+  // 총거리 합산
   totalDistance += dist;
+  console.log('총 이동거리 = ' + totalDistance.toFixed(2));
+  return Number(dist * 1000).toFixed(2);
 
-  return Number(totalDistance * 1000).toFixed(2);
-};
+}
 
-function degTorad(deg) {
+function deg2rad(deg) {
   return (deg * Math.PI / 180);
 }
-function radTodeg(rad) {
+function rad2deg(rad) {
   return (rad * 180 / Math.PI);
 }
 
@@ -317,30 +407,28 @@ function radTodeg(rad) {
 
 
 
-
-
 // 위경도 값을 받아오는 함수
 function locationCalculator() {
-  // console.log("loactionCalculator 실행됐다~");
-
-
   // 만약 startLatitude 또는 startLongtitude에 저장된 값이 없다면 시작 위경도 받아오기
   if (startLatitude == 0 || startLogntitude == 0) {
     navigator.geolocation.getCurrentPosition(
       function (position) {
         startLatitude = position.coords.latitude;
         startLogntitude = position.coords.longitude;
+        // previous 위경도 값도 시작값으로 초기화, else문에 활용하기 위함
         previousLatitude = position.coords.latitude;
         previousLongitude = position.coords.longitude;
+
+        latiArr.push(startLatitude);
+        longtiArr.push(startLogntitude);
+
+
         console.log("-----------------------------------");
         console.log("초기 위경도값 X");
-        // console.log(`startLatitude: ${startLatitude}`); // test
-        // console.log(`startLogntitude: ${startLogntitude}`); // test
-        // console.log(`previousLatitude: ${previousLatitude}`); // test
-        // console.log(`previousLongitude: ${previousLongitude}`); // test
-        // console.log(`currentLatitude: ${currentLatitude}`); // test
-        // console.log(`currentLongtitude: ${currentLongtitude}`); // test
-        console.log(`totalDistance: ${totalDistance}`);
+        console.log(`previousLatitude =  ${previousLatitude}`);
+        console.log(`previousLongitude =  ${previousLongitude}`);
+        console.log(`currentLatitude =  ${currentLatitude}`);
+        console.log(`currentLongtitude =  ${currentLongtitude}`);
         console.log("-----------------------------------");
       }
     )
@@ -348,40 +436,46 @@ function locationCalculator() {
 
   }
 
-  // 시작 위경도 값이 있는 경우
-  else {
+  // 시작 or 이전 위경도 값이 있는 경우 or 
+  else if (startLatitude != 0 || startLogntitude != 0 || previousLatitude != 0 || previousLongitude != 0) {
     navigator.geolocation.getCurrentPosition(
       function (position) {
 
         currentLatitude = position.coords.latitude;
         currentLongtitude = position.coords.longitude;
 
+
+        // 위경도 임의 조작
+        i += 0.0001;
+        currentLatitude = currentLatitude + i;
+        latiArr.push(currentLatitude);
+        longtiArr.push(currentLongtitude);
+
         console.log("-----------------------------------");
         console.log("초기 위경도 값 O");
-        // console.log(`previousLatitude: ${previousLatitude}`); // test
-        // console.log(`previousLongitude: ${previousLongitude}`); // test
-        // console.log(`currentLatitude: ${currentLatitude}`); // test
-        // console.log(`currentLongtitude: ${currentLongtitude}`); // test
-        // console.log("-----------------------------------");
+        console.log(`previousLatitude =  ${previousLatitude}`);
+        console.log(`previousLongitude =  ${previousLongitude}`);
+        console.log(`currentLatitude =  ${currentLatitude}`);
+        console.log(`currentLongtitude =  ${currentLongtitude}`);
+        console.log("-----------------------------------");
 
-        // 계산 **더미좌표 current좌표로 바꿀것
+
+        // 두 좌표간 거리 계산 & 총 거리 계산
         calDistance(previousLatitude, previousLongitude, currentLatitude, currentLongtitude);
 
         // 계산 후 previous 값들을 current값으로 초기화
         previousLatitude = currentLatitude;
         previousLongitude = currentLongtitude;
 
-        // 총거리
-        console.log(`totalDistance: ${totalDistance}`);
 
-        // console.log(`previousLatitude: ${previousLatitude} \n previousLongitude: ${previousLongitude}`); // test
-        // console.log(`currentLatitude: ${currentLatitude} \n currentLongtitude: ${currentLongtitude}`); // test
-        console.log("-----------------------------------");
-
-
+        // console.log(`계산 후 previousLatitude =  ${previousLatitude}`);
+        // console.log(`계산 후 previousLongitude =  ${previousLongitude}`);
       });
 
+
+
   };
+
 
 
 
@@ -393,6 +487,5 @@ function locationCalculator() {
 
 
 };
-
 
 
