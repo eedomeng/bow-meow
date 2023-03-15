@@ -37,8 +37,9 @@ public class UserControllerTest {
 		SignUpRequest form = new SignUpRequest();
 		form.setUserName("test");
 		form.setPassword("123qwe!@#QWE");
-		form.setEmail("eedomeng@naver.com");
+		form.setEmail("domeng@naver.com");
 		form.setTell("010-0000-0112");
+		form.setGrade("ROLE_ADMIN");
 		
 		mockMvc.perform(get("/user/signupimpl/1234")
 				.sessionAttr("signupForm", form)
