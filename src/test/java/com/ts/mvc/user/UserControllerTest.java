@@ -31,6 +31,7 @@ public class UserControllerTest {
 		.andDo(print());
 	}
 	
+	// 더미데이터 만들기
 	@Test
 	@DisplayName("회원가입 정보 저장")
 	public void testsignUpImpl() throws Exception {
