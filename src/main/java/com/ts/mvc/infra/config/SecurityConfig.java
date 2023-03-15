@@ -67,6 +67,7 @@ public class SecurityConfig {
 		// csrf : post요청일 때 수행해야 하는 csrf 토큰 검증을 끔
 		//http.csrf().disable();
 		http.csrf().ignoringAntMatchers("/mail");
+		http.csrf().ignoringAntMatchers("/blog");
 		return http.build();
 	}
 	
