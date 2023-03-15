@@ -30,4 +30,10 @@ public class WelcomeController {
 //		return "/html/index";
 //	}
 	
+
+	@GetMapping(value = "/welcome/weather.do")
+	public String WelcomeWeather() {
+		return "/welcome";
+		}
+	
 }
