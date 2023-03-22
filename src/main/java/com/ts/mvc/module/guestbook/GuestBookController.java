@@ -2,7 +2,6 @@ package com.ts.mvc.module.guestbook;
 
 import java.util.Map;
 
-
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
@@ -38,6 +37,7 @@ public class GuestBookController {
 		
 		return "/html/guestbook";
 	}
+
 
 	@PostMapping("upload")
 	public String upload(GuestBookRegistRequest dto) {
