@@ -240,65 +240,6 @@
 	</div>
 	<!-- / Layout wrapper -->
 	
-	<!-- ChatGPT API Script  -->
-	<script type="text/javascript" layout:fragment="script">
-
-    let loadInterval = setTimeout("hideLoading()", 10000);
-     
-	function clickedBtn() {
-		loadInterval;
-		showLoading();
-	}
-	
-	function showLoading() {
-		$('#roadingStatus').show();
-	}
-	
-	function hideLoading(){
-		$("#roadingStatus").hide();
-	}
-	
-	function stopLoading() {
-		clearInterval("hideLoading()");
-	}
-	
-	function createAnswer() {
-		const api_key = "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";
-		const question = document.getElementById('aiQuestion').value;
-		const messages = [
-			{role:'system', content: 'You are a helpful assistant.'},
-			{role:'user', content: question}
-		]
-		const data = {
-				model: "gpt-3.5-turbo",
-			  	messages: messages
-		}
-		
-		const config = {
-				method: 'POST',
-				headers: {
-					Authorization : `Bearer ${api_key}`,
-					'Content-Type' : 'application/json'
-				},
-		
-				body: JSON.stringify(data)
-		}
-		
-		fetch('https://api.openai.com/v1/chat/completions',config)
-		.then(response => response.text()) 
-		.then(text => { 
-			let data = JSON.parse(text);
-			let content = data.choices[0].message.content;
-			document.getElementById("result").append(content); 
-			})
-	
-		.catch(function (error) {
-			console.error(error)
-			let errorMessage="다시 시도해주세요.";
-			document.getElementById("result").append(errorMessage);})
-		}
-	
-	</script>
 	
 
 	
