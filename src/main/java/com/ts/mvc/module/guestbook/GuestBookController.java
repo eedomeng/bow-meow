@@ -66,6 +66,11 @@ public class GuestBookController {
 	   guestBookService.removeBoard(bdIdx, UserPrincipal.getUserPrincipal().getPrincipal());
       return "redirect:/guestbook";
    }
+   
+   @GetMapping("sb")
+   public String guestbook2() {
+      return "/html/guestbook";
+   }
 
    
    
