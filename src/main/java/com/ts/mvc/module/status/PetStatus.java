@@ -28,7 +28,7 @@ public class PetStatus {
 
 	@Id
 	@GeneratedValue
-	private Integer statusIdx;
+	private Long statusIdx;
 	
 	private String chosenDate;
 	
