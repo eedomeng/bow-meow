@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import com.ts.mvc.module.guestbook.dto.GuestBookDto;
+import com.ts.mvc.module.guestbook.dto.request.GuestBookRegistRequest;
 import com.ts.mvc.module.user.User;
 
 import lombok.AllArgsConstructor;
@@ -41,14 +41,11 @@ public class GuestBook {
 	@ManyToOne
 	private User host; // 발신자
 	
-	
-	public static GuestBook createBoard(GuestBookDto dto, User user) {
-	      return GuestBook.builder()
-	            .user(user)
-	            .content(dto.getContent())
-	            .gbIdx(dto.getGbIdx())
-	            .regDate(dto.getRegdate())
-	            .build();
-	   }
-	
+	public static GuestBook createGuestBook(GuestBookRegistRequest dto, User user) {
+		return GuestBook.builder()
+				.host(user)
+				.user(user)
+				.content(dto.getContent())
+				.build();
+	}
 }

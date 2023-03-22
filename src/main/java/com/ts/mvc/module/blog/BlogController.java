@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ts.mvc.module.blog.dto.BlogDto;
 import com.ts.mvc.module.guestbook.GuestBookService;
-import com.ts.mvc.module.guestbook.dto.GuestBookDto;
 import com.ts.mvc.module.user.UserPrincipal;
 
 import lombok.AllArgsConstructor;
