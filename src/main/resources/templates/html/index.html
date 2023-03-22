@@ -28,12 +28,9 @@
  margin-top: 5vw;
  margin-left: 50%;
 }
-
-
 </style>
-
-	<script defer src="../js/weather-api.js"></script>
-
+<script src="../assets/js/weather_info_api.js"></script>
+<script src="../assets/js/dust_info_api.js"></script>
 </head>
 
 <body>
@@ -60,7 +57,7 @@
 					<!-- Content -->
 
 					<div class="container-xxl flex-grow-1 container-p-y">
-            <div class="row">
+            			<div class="row">
 							<!-- Weather & Fine dust start -->
 							<div class="col-12">
 								<div class="card">
@@ -70,47 +67,47 @@
 											<!-- 온도 영역 백그라운드 이미지를 강아지 사진을 쓰는건 어떨까요 -->
                       							<div class="info-wrap text-primary">
 												<div class="main-temp row justify-content-center text-center">
-												<!-- 날씨 api -->
-												<div class="weather row">
-												</div>
-													<h1 class="card-header h1">14º</h1>
-													<h3 class="card-header h3">오늘은 산책가기 좋은 날!</h3>
-												</div>
+												
+													<!-- 날씨 api -->
 
-												<div class="weather-info">
-                          <ul class="weather-temp">
-                            <li>어제보다 3'C 높아요</li>
-                            <li>습도</li>
-                            <li>바람</li>
-                            <li>1시간 강수량</li>
-                          </ul>
-                        </div>
-												<hr>
-												<div class="weather-info">
-													<ul class="weather-date">
-														<li>월</li>
-														<li>화</li>
-														<li>수</li>
-														<li>목</li>
-														<li>금</li>
-														<li>토</li>
-														<li>일</li>
-													</ul>
-												</div>
-												<hr>
-                        <div class="weather-info">
-                          <ul class="dust-info">
-                            <li>초미세먼지 : 주의</li>
-                            <li>미세먼지 : 주의</li>
-                            <li>오존 : ? </li>
-                          </ul>
-                        </div>
-                      </div>
+													<div id = "icon">
+														<span> </span>
+													</div>
+													<div id = "city">
+														<span> </span>
+													</div>
+													<div id = "nowtemp">
+														<span> </span>
+													</div>
+													<div id = "feellike">
+														<span> </span>
+													</div>
+													<div id = "humid">
+														<span> </span>
+													</div>
+													<div id = "wind">
+														<span> </span>
+													</div>
+
+													<!-- 미세먼지 api -->
+													
+													<div id = "mainval">
+														<span> </span>
+													</div>
+													<div id = "pm10">
+														<span> </span>
+													</div>
+													<div id = "pm2_5">
+														<span> </span>
+													</div>
+
+                        						</div>
+                     							</div>
 										</div>
 									</div>
 								</div>
 							</div>
-            </div>
+            			</div>
 						<!-- Weather & Fine dust end -->
 
 
@@ -122,8 +119,10 @@
 									<hr>
 									<div class="card-body" style="height: 200px;">차트가 들어갈 영역입니다.</div>
 								</div>
-							</div>
 						</div>
+						</div>
+					</div>
+				</div>	
 						<!-- Health Status Dash Board Area end -->
 
 
@@ -241,8 +240,9 @@
 	</div>
 	<!-- / Layout wrapper -->
 	
+	<!-- ChatGPT API Script  -->
 	<script type="text/javascript" layout:fragment="script">
-	
+
     let loadInterval = setTimeout("hideLoading()", 10000);
      
 	function clickedBtn() {
@@ -299,7 +299,6 @@
 		}
 	
 	</script>
-
 	
 
 	
