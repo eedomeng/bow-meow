@@ -1,4 +1,4 @@
-window.onload = function() {
+window.onload = function () {
     function onGeoOk(position) {
         const API_KEY = "API_KEY"; //openweather API키 입력
         const lat = position.coords.latitude;
@@ -16,7 +16,7 @@ window.onload = function() {
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
-                
+
                 city.innerText = data.name;
                 desc.innerText = data.weather[0].description;
                 nowtemp.innerText = "현재 날씨 : " + Math.round(`${data.main.temp}`) + "°C";
@@ -25,7 +25,7 @@ window.onload = function() {
                 wind.innerText = "풍속 : " + `${data.wind.speed}` + "m/s";
                 const iconUrl = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
                 icon.innerHTML = `<img src="${iconUrl}">`;
-                
+
             })
             .catch((error) => console.log("error:", error));
     }
