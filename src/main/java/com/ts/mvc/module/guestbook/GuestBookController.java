@@ -2,16 +2,21 @@ package com.ts.mvc.module.guestbook;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
-
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ts.mvc.module.guestbook.dto.request.GuestBookRegistRequest;
 import com.ts.mvc.module.guestbook.dto.response.GuestBookDetailResponse;
@@ -35,17 +40,27 @@ public class GuestBookController {
 //		GuestBookDetailResponse dto = guestBookService.findGuestBookByGbIdx(gbIdx);
 //		model.addAttribute("guestbook", dto);
 		
-		return "/html/guestbook";
+		return "/html/testguestbook";
 	}
+	
+//	@PostMapping("")
+//	@ResponseBody
+//	public GuestBook handleFormData(@RequestBody String content,GuestBook guestbook) {
+//		System.out.println(content);
+//		guestbook.setContent(content);
+//		System.out.println(guestbook.getContent());
+//		
+//		return guestbook;
+//	}
+	
 
 
 	@PostMapping("upload")
 	public String upload(GuestBookRegistRequest dto) {
-		
 		dto.setUserId(UserPrincipal.getUserPrincipal().getUserId());
 		guestBookService.createGuestBook(dto);
 		
-		return "redirect:/";
+		return "redirect:/guestbook";
 	}
 	
 	@PostMapping("remove")
