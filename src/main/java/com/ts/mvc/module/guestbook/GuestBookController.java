@@ -40,12 +40,15 @@ public class GuestBookController {
 
 
 	@PostMapping("upload")
-	public String upload(GuestBookRegistRequest dto) {
+	public String upload(GuestBookRegistRequest dto, Model model) {
 		
 		dto.setUserId(UserPrincipal.getUserPrincipal().getUserId());
 		guestBookService.createGuestBook(dto);
 		
-		return "redirect:/";
+		System.out.println(dto.getContent());
+		model.addAttribute("guestbook", dto);
+		
+		return "redirect:/guestbook";
 	}
 	
 	@PostMapping("remove")
