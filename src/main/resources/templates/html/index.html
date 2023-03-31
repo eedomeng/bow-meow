@@ -30,14 +30,20 @@
 }
 </style>
 
+	<link href="/css/welcome/chat-modal.css">
+
 	 <!-- 미세먼지 스크립트입니다 -->
 	<script defer src="../assets/js/dust_info_api.js"></script>
 	 <!-- chatGPT 스크립트입니다 -->
 	<script defer src="../js/chatGPT.js"></script>
 	 <!-- 동물 품종 리스트 스크립트 -->
     <script src="../assets/js/pet-list.js"></script>
+    
+    
      <!-- chatting 스크립트 -->
-    <script defer src="../js/chat.js"></script>
+   	 <script defer src="../js/chat.js"></script>
+   	  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+	  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 
 </head>
 
@@ -213,64 +219,240 @@
 												<p class="card-text">#남 #으르렁 #으르렁대 #3살 #사교적</p>
 												<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
 												<p class="card-text"><button class="btn btn-primary" onclick="" type="button" data-bs-toggle="modal" data-bs-target="#modalScrollable" >실시간 채팅하기</button></p>
-												
-							                      <!-- Modal -->
-							                   <div class="modal fade" id="modalScrollable" tabindex="-1" aria-hidden="true">
-							                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+												 
+												 
+												 
+												 <div class="modal fade" id="modalScrollable" tabindex="-1" aria-hidden="true">
+												 <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
 							                          <div class="modal-content">
-							                            <div class="modal-header">
-							                              <h5 class="modal-title" id="modalScrollableTitle">Modal title</h5>
-							                              <button
-							                                type="button"
-							                                class="btn-close"
-							                                data-bs-dismiss="modal"
-							                                aria-label="Close"
-							                              ></button>
-							                            </div>
-							                            <div class="modal-body" id="chat-body">
-							                             <div class="card-body">
-							                                Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-							                                in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-							                             </div>
-							                              <p>
-							                                Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-							                                in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-							                              </p>
-							                              <p>
-							                                Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-							                                lacus vel augue laoreet rutrum faucibus dolor auctor.
-							                              </p>
-							                              <p>
-							                                Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
-							                                scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
-							                                auctor fringilla.
-							                              </p>
-							                              <p>
-							                                Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-							                                in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-							                              </p>
-							                              <p>
-							                                Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-							                                lacus vel augue laoreet rutrum faucibus dolor auctor.
-							                              </p>
-							                              <p>
-							                                Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
-							                                scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
-							                                auctor fringilla.
-							                              </p>
-							                            </div>
-							                            <div class="row card-body">
-						                            	<input class="form-control" id="chat" style="height: 50px" required></input>
-							                              <button type="button" class="btn btn-primary" onclick="javascript:showChat();">send message</button>
-							                            </div>
-							                            <div class="modal-footer">
-							                              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-							                                Close
-							                              </button>
-							                            </div>
-							                          </div>
-							                        </div>
-							                      </div>
+							                   			<section style="background-color: #CDC4F9;">
+														  <div class="container py-5">
+														
+														    <div class="row">
+														      <div class="col-md-12">
+														
+														        <div class="card" id="chat3" style="border-radius: 15px;">
+														          <div class="card-body">
+														
+														            <div class="row">
+														              <div class="col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0">
+														
+														                <div class="p-3">
+														
+														                  <div class="input-group rounded mb-3">
+														                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+														                      aria-describedby="search-addon" />
+														                    <span class="input-group-text border-0" id="search-addon">
+														                      <i class="fas fa-search"></i>
+														                    </span>
+														                  </div>
+														
+														                  <div style="position: relative; height: 400px; overflow: auto;">
+														                    <ul class="list-unstyled mb-0">
+														                      <li class="p-2 border-bottom">
+														                        <a href="#!" class="d-flex justify-content-between">
+														                          <div class="d-flex flex-row">
+														                            <div>
+														                              <img
+														                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+														                                alt="avatar" class="d-flex align-self-center me-3" width="60">
+														                              <span class="badge bg-success badge-dot"></span>
+														                            </div>
+														                            <div class="pt-1">
+														                              <p class="fw-bold mb-0">Marie Horwitz</p>
+														                              <p class="small text-muted">Hello, Are you there?</p>
+														                            </div>
+														                          </div>
+														                          <div class="pt-1">
+														                            <p class="small text-muted mb-1">Just now</p>
+														                            <span class="badge bg-danger rounded-pill float-end">3</span>
+														                          </div>
+														                        </a>
+														                      </li>
+														                      <li class="p-2 border-bottom">
+														                        <a href="#!" class="d-flex justify-content-between">
+														                          <div class="d-flex flex-row">
+														                            <div>
+														                              <img
+														                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
+														                                alt="avatar" class="d-flex align-self-center me-3" width="60">
+														                              <span class="badge bg-warning badge-dot"></span>
+														                            </div>
+														                            <div class="pt-1">
+														                              <p class="fw-bold mb-0">Alexa Chung</p>
+														                              <p class="small text-muted">Lorem ipsum dolor sit.</p>
+														                            </div>
+														                          </div>
+														                          <div class="pt-1">
+														                            <p class="small text-muted mb-1">5 mins ago</p>
+														                            <span class="badge bg-danger rounded-pill float-end">2</span>
+														                          </div>
+														                        </a>
+														                      </li>
+														                      <li class="p-2 border-bottom">
+														                        <a href="#!" class="d-flex justify-content-between">
+														                          <div class="d-flex flex-row">
+														                            <div>
+														                              <img
+														                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
+														                                alt="avatar" class="d-flex align-self-center me-3" width="60">
+														                              <span class="badge bg-success badge-dot"></span>
+														                            </div>
+														                            <div class="pt-1">
+														                              <p class="fw-bold mb-0">Danny McChain</p>
+														                              <p class="small text-muted">Lorem ipsum dolor sit.</p>
+														                            </div>
+														                          </div>
+														                          <div class="pt-1">
+														                            <p class="small text-muted mb-1">Yesterday</p>
+														                          </div>
+														                        </a>
+														                      </li>
+														                      <li class="p-2 border-bottom">
+														                        <a href="#!" class="d-flex justify-content-between">
+														                          <div class="d-flex flex-row">
+														                            <div>
+														                              <img
+														                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4-bg.webp"
+														                                alt="avatar" class="d-flex align-self-center me-3" width="60">
+														                              <span class="badge bg-danger badge-dot"></span>
+														                            </div>
+														                            <div class="pt-1">
+														                              <p class="fw-bold mb-0">Ashley Olsen</p>
+														                              <p class="small text-muted">Lorem ipsum dolor sit.</p>
+														                            </div>
+														                          </div>
+														                          <div class="pt-1">
+														                            <p class="small text-muted mb-1">Yesterday</p>
+														                          </div>
+														                        </a>
+														                      </li>
+														                      <li class="p-2 border-bottom">
+														                        <a href="#!" class="d-flex justify-content-between">
+														                          <div class="d-flex flex-row">
+														                            <div>
+														                              <img
+														                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava5-bg.webp"
+														                                alt="avatar" class="d-flex align-self-center me-3" width="60">
+														                              <span class="badge bg-warning badge-dot"></span>
+														                            </div>
+														                            <div class="pt-1">
+														                              <p class="fw-bold mb-0">Kate Moss</p>
+														                              <p class="small text-muted">Lorem ipsum dolor sit.</p>
+														                            </div>
+														                          </div>
+														                          <div class="pt-1">
+														                            <p class="small text-muted mb-1">Yesterday</p>
+														                          </div>
+														                        </a>
+														                      </li>
+														                      <li class="p-2">
+														                        <a href="#!" class="d-flex justify-content-between">
+														                          <div class="d-flex flex-row">
+														                            <div>
+														                              <img
+														                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"
+														                                alt="avatar" class="d-flex align-self-center me-3" width="60">
+														                              <span class="badge bg-success badge-dot"></span>
+														                            </div>
+														                            <div class="pt-1">
+														                              <p class="fw-bold mb-0">Ben Smith</p>
+														                              <p class="small text-muted">Lorem ipsum dolor sit.</p>
+														                            </div>
+														                          </div>
+														                          <div class="pt-1">
+														                            <p class="small text-muted mb-1">Yesterday</p>
+														                          </div>
+														                        </a>
+														                      </li>
+														                    </ul>
+														                  </div>
+														
+														                </div>
+														
+														              </div>
+														
+														              <div class="col-md-6 col-lg-7 col-xl-8">
+														
+														                <div class="pt-3 pe-3" 
+														                  style="position: relative; height: 400px; overflow: auto;" id="response"><!--  -->
+														
+														                  <div class="d-flex flex-row justify-content-start" >
+														                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"
+														                      alt="avatar 1" style="width: 45px; height: 100%;">
+														                    <div>
+														                      <p class="small p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7;">Lorem ipsum
+														                        dolor
+														                        sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+														                        dolore
+														                        magna aliqua.</p>
+														                      <p class="small ms-3 mb-3 rounded-3 text-muted float-end">12:00 PM | Aug 13</p>
+														                    </div>
+														                  </div>
+														
+														                  <div class="d-flex flex-row justify-content-end">
+														                    <div>
+														                      <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">Nemo enim ipsam
+														                        voluptatem quia
+														                        voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos
+														                        qui
+														                        ratione voluptatem sequi nesciunt.</p>
+														                      <p class="small me-3 mb-3 rounded-3 text-muted">12:00 PM | Aug 13</p>
+														                    </div>
+														                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+														                      alt="avatar 1" style="width: 45px; height: 100%;">
+														                  </div>
+														
+														                  <div class="d-flex flex-row justify-content-start">
+														                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"
+														                      alt="avatar 1" style="width: 45px; height: 100%;">
+														                    <div>
+														                      <p class="small p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7;">Neque porro
+														                        quisquam
+														                        est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non
+														                        numquam
+														                        eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+														                      <p class="small ms-3 mb-3 rounded-3 text-muted float-end">12:00 PM | Aug 13</p>
+														                    </div>
+														                  </div>
+														
+														                  <div class="d-flex flex-row justify-content-end">
+														                    <div>
+														                      <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">Ut enim ad minima veniam,
+														                        quis
+														                        nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea
+														                        commodi
+														                        consequatur?</p>
+														                      <p class="small me-3 mb-3 rounded-3 text-muted">12:00 PM | Aug 13</p>
+														                    </div>
+														                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+														                      alt="avatar 1" style="width: 45px; height: 100%;">
+														                  </div>
+														
+														                </div>
+														
+														                <div class="text-muted d-flex justify-content-start align-items-center pe-3 pt-3 mt-2">
+														                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"
+														                    alt="avatar 3" style="width: 40px; height: 100%;">
+														                  <input type="text" class="form-control form-control-lg" id="msg"
+														                    placeholder="Type message">
+														                  <button class="btn btn-default ms-3" type="submit" id="button-send" onclick="javascript:sendMessage();"><i class="fas fa-paper-plane"></i></button>
+														                </div>
+														
+														              </div>
+														            </div>
+														
+														          </div>
+														        </div>
+														
+														      </div>
+														    </div>
+														
+														  </div>
+														</section>
+														  </div>
+														</div>
+														</div>
                
                       
 											
@@ -331,7 +513,12 @@
 		<!-- Overlay -->
 		<div class="layout-overlay layout-menu-toggle"></div>
 	<!-- / Layout wrapper -->
+	<script type="text/javascript" layout:fragment="script" th:inline="javascript">
 	
+	
+	
+	
+	</script>
 
 </body>
 </html>
