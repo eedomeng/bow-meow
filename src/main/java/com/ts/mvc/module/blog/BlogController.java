@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ts.mvc.module.blog.dto.BlogDto;
 import com.ts.mvc.module.guestbook.GuestBookService;
+import com.ts.mvc.module.status.dto.PetStatusDto;
 import com.ts.mvc.module.user.UserPrincipal;
 
 import lombok.AllArgsConstructor;
@@ -80,11 +81,7 @@ public class BlogController {
    public String diaryMofdify() {
       return "/html/diary-modify";
    }
-   
-   @GetMapping("status")
-   public String status() {
-      return "/html/status";
-   }
+ 
 
    
 
