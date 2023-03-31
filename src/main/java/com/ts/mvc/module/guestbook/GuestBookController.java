@@ -40,7 +40,7 @@ public class GuestBookController {
 //		GuestBookDetailResponse dto = guestBookService.findGuestBookByGbIdx(gbIdx);
 //		model.addAttribute("guestbook", dto);
 		
-		return "/html/testguestbook";
+		return "/html/guestbook";
 	}
 
 	@PostMapping("upload")
