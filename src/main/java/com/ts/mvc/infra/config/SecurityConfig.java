@@ -25,6 +25,7 @@ import lombok.AllArgsConstructor;
 @Configuration
 @EnableWebSecurity // Spring Security의 기본 설정 대신 사용자가 커스터마이징한 설정을 시큐리티에 적용
 @AllArgsConstructor
+//jw 추가함
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class SecurityConfig {
 	private final DataSource datsSource;
