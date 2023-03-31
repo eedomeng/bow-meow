@@ -9,7 +9,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
@@ -17,15 +16,12 @@ import org.springframework.security.web.authentication.rememberme.JdbcTokenRepos
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import com.ts.mvc.infra.config.oauth.OAuth2DetailsService;
-import com.ts.mvc.infra.config.security.AuthFailureHandler;
-import com.ts.mvc.infra.config.security.AuthSuccessHandler;
 
 import lombok.AllArgsConstructor;
 
 @Configuration
 @EnableWebSecurity // Spring Security의 기본 설정 대신 사용자가 커스터마이징한 설정을 시큐리티에 적용
 @AllArgsConstructor
-//jw 추가함
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class SecurityConfig {
 	private final DataSource datsSource;
@@ -73,6 +69,8 @@ public class SecurityConfig {
 			.userDetailsService(userDetailsService)
 			.tokenRepository(tokenRepository());
 		
+		
+		
 		// csrf : post요청일 때 수행해야 하는 csrf 토큰 검증을 끔
 		//http.csrf().disable();
 		http.csrf().ignoringAntMatchers("/mail");
@@ -80,6 +78,7 @@ public class SecurityConfig {
 		http.csrf().ignoringAntMatchers("/guestbook/upload");
 		http.csrf().ignoringAntMatchers("/guestbook/update");
 		http.csrf().ignoringAntMatchers("/guestbook/delete");
+		http.csrf().disable().cors(); // ajax 사용하면서 put 오류나는거때문에...
 		return http.build();
 	}
 	
@@ -88,5 +87,7 @@ public class SecurityConfig {
 		return web -> web.ignoring().antMatchers("/assets/**", "/css/**", "/fonts/**", "/icon/**", "/js/**", "/scss/**")
 						 .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
 	}
+	
+	
 
 }
