@@ -23,12 +23,21 @@
 	>
 <head>
 
+
 <style>
 #roadingStatus{
  margin-top: 2vw;
  margin-left: 50%;
 }
 </style>
+
+    <!-- Load c3.css -->
+	<link href="../assets/c3/c3-0.7.20/c3-0.7.20/c3.css" rel="stylesheet">
+
+	<!-- Load d3.js and c3.js -->
+	<!-- <script src="/path/to/d3.v5.min.js" charset="utf-8"></script> -->
+	<script src="https://d3js.org/d3.v5.min.js"></script>
+	<script src="../assets/c3/c3-0.7.20/c3-0.7.20/c3.min.js"></script>
 
 	 <!-- 미세먼지 스크립트입니다 -->
 	<script defer src="../assets/js/dust_info_api.js"></script>
@@ -38,6 +47,9 @@
     <script src="../assets/js/pet-list.js"></script>
      <!-- chatting 스크립트 -->
     <script defer src="../js/chat.js"></script>
+    
+  	<!-- 그래프 스크립트 -->
+   <script defer src="../assets/js/status-chart.js"></script>
 
 </head>
 
@@ -123,12 +135,30 @@
 
 
 							<!-- Health Status Dash Board Area start-->
-							<div class="row">
+							<div class="row health status">
 							<div class="col-12">
 									<div class="card">
 										<div class="card-text h1">Health status</div>
+										
 										<hr>
-										<div class="card-body" style="height: 200px;">차트가 들어갈 영역입니다.</div>
+										<div class="card-body" style="height: 400px;">
+				 						 <!-- chart start -->
+                                               <div class=chart>
+   
+				                              		<div class="main-contents2 col-9" id="third-area">
+					                           		<div class="day-graph card col-9">
+					                         		<h4 id="easy-checker-title">오늘 두콩이는 이만큼 먹고 마셨다.</h4>
+                                                    <div class="chart-wrapper">
+				                                    <div id="total-chart">
+									                <!-- 차트 공간 -->
+									                </div>
+								</div>
+							</div>
+					    </div>
+					    </div>
+				 <!-- chart fin-->
+										
+										</div>
 									</div>
 							</div>
 							</div>
