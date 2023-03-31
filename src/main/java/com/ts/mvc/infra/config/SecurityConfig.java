@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -70,11 +71,14 @@ public class SecurityConfig {
 			.userDetailsService(userDetailsService)
 			.tokenRepository(tokenRepository());
 		
+		
+		
 		// csrf : post요청일 때 수행해야 하는 csrf 토큰 검증을 끔
 		//http.csrf().disable();
 		http.csrf().ignoringAntMatchers("/mail");
 		http.csrf().ignoringAntMatchers("/blog");
 //		http.csrf().ignoringAntMatchers("/guestbook");
+		http.csrf().disable().cors(); // ajax 사용하면서 put 오류나는거때문에...
 		return http.build();
 	}
 	
@@ -83,5 +87,7 @@ public class SecurityConfig {
 		return web -> web.ignoring().antMatchers("/assets/**", "/css/**", "/fonts/**", "/icon/**", "/js/**", "/scss/**")
 						 .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
 	}
+	
+	
 
 }
