@@ -24,5 +24,4 @@ public class WebConfig implements WebMvcConfigurer{
 				.resourceChain(true)
 				.addResolver(new PathResourceResolver());
 	}
-	// 확인용 주석
 }
