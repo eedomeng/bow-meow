@@ -81,7 +81,7 @@
 	<aside id="layout-menu"
 				class="layout-menu menu-vertical menu bg-menu-theme" th:fragment="aside">
 				<div class="app-brand demo">
-					<a href="index.html" class="app-brand-link">
+					<a th:href="@{/}" class="app-brand-link">
 					
 					 <span
 						class="app-brand-logo demo">
@@ -115,7 +115,7 @@
                     </a>
                   </li>
                   <li class="menu-item">
-                    <a href="/blog/diary" class="menu-link">
+                    <a href="/diary/google_118230378710155400297" class="menu-link">
                       <i class="menu-icon tf-icons bx bx-collection"></i>
                       <div data-i18n="Basic">diary</div>
                     </a>
@@ -173,21 +173,22 @@
 			<li class="nav-item navbar-dropdown dropdown-user dropdown">
 				<a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
 					<div class="avatar avatar-online">
-						<img src="../assets/img/avatars/basic.jpg" alt class="w-px-40 h-auto rounded-circle" />
+						<img th:src="${#authentication.principal.profileImageUrl}" alt class="w-px-40 h-auto rounded-circle" />
 					</div>
 				</a>
 		
 		<ul class="dropdown-menu dropdown-menu-end">
-			<li><a class="dropdown-item" href="#">
+			<li><a class="dropdown-item" href="/user/modify">
 				<div class="d-flex">
 					<div class="flex-shrink-0 me-3">
 						<div class="avatar avatar-online">
-							<img src="../assets/img/avatars/basic.jpg" alt class="w-px-40 h-auto rounded-circle" />
+							<img th:src="${#authentication.principal.profileImageUrl}" alt class="w-px-40 h-auto rounded-circle" />
 						</div>
 					</div>
 					
 					<div class="flex-grow-1">
 						<span class="fw-semibold d-block" th:text="${#authentication.principal.nickname}"></span>
+						<small class="text-muted">정보변경</small>
 					</div>
 				</div>
 			</a></li>

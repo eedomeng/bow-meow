@@ -71,15 +71,15 @@ public class BlogController {
 //      return "/html/testguestbook";
 //   }
    
-   @GetMapping("diary")
-   public String diary() {
-      return "/html/diary";
-   }
-   
-   @GetMapping("diary-modify")
-   public String diaryMofdify() {
-      return "/html/diary-modify";
-   }
+//   @GetMapping("diary")
+//   public String diary() {
+//      return "/html/diary";
+//   }
+//   
+//   @GetMapping("diary-modify")
+//   public String diaryMofdify() {
+//      return "/html/diary-modify";
+//   }
    
    @GetMapping("status")
    public String status() {
