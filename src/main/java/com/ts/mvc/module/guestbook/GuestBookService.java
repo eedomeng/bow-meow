@@ -102,8 +102,6 @@ public class GuestBookService {
 		
 	}
 
-	
-	
 	public Map<String, Object> findGuestBookList(Pageable pageable) {
 		Page<GuestBook> page = guestBookRepository.findAll(pageable);
 		
@@ -130,13 +128,17 @@ public class GuestBookService {
 		
 		// 페이지 소유여부 검증로직
 		// 1. GuestBook Entity에서 1번 gbIdx에 해당하는 데이터 찾기
-	    GuestBook guestBookEntity = guestBookRepository.findByGbIdx((long) 1).orElseThrow(() -> {
-	        throw new CustomException("존재하지 않는 게스트북입니다.");
-	    });
+//	    GuestBook guestBookEntity = guestBookRepository.findByGbIdx((long) 1).orElseThrow(() -> {
+//	        throw new CustomException("존재하지 않는 게스트북입니다.");
+//	    });
+	    
+	    User guestBookEntity = userRepository.findById(pageOwnerNickName).orElseThrow(() -> {
+			throw new CustomException("해당 다이어리는 없는 페이지입니다.");
+		});
 		
 	    
 	    // 2.로직 : gbIdx == 1인 값과 현재 방문자의 userId를 비교하여 현재 방문자가 페이지의 소유권을 가지고 있는지 판단한다.
-	    if(guestBookEntity.getUser().getUserId().equals(visitUserId)) {
+	    if(guestBookEntity.getUserId().equals(visitUserId)) {
 	    	dto.setUser(visitUserId);
 	    	dto.setPageOwner(true); // 페이지 소유자 O
 	    	dto.setPageVisitor(false); // 방문자 X

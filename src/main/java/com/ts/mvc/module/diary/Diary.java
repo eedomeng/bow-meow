@@ -28,9 +28,7 @@ import lombok.NoArgsConstructor;
 @DynamicUpdate // entity에서 변경이 발견되지 않은 값은 쿼리에서 생략
 @Builder @NoArgsConstructor @AllArgsConstructor @Getter
 public class Diary {
-	
-	// chg
-	
+		
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long dyIdx;

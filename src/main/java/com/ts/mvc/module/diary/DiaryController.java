@@ -51,5 +51,12 @@ public class DiaryController {
 		return "redirect:/diary/" + userPrincipal.getUser().getUserId();
 	}
 	
+	@PostMapping("remove")
+	public String diaryRemove(Long dyIdx, @AuthenticationPrincipal UserPrincipal userPrincipal) {
+		diaryService.removeDiary(dyIdx, UserPrincipal.getUserPrincipal().getUserId());
+		
+		return "redirect:/diary/" + userPrincipal.getUser().getUserId();
+	}
+	
 	
 }

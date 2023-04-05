@@ -165,6 +165,22 @@
 			<a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)"> <i class="bx bx-menu bx-sm"></i></a>
 		</div>
 		
+		<!-- Search -->
+			<form action="/search">
+              <div class="navbar-nav align-items-center">
+                <div class="nav-item d-flex align-items-center">
+                  <i class="bx bx-search fs-4 lh-0"></i>
+                  <input
+                    type="text"
+                    class="form-control border-0 shadow-none"
+                    placeholder="Search..."
+                    aria-label="Search..."
+                  />
+                </div>
+              </div>
+            </form>
+              <!-- /Search -->
+		
 		<div class="dm flex-row-align-items-center" sec:authorize="!isAuthenticated()" style="display:flex">
 			<a class="dropdown-item" href="/user/login">login</a>
 			<a class="dropdown-item" href="/user/signup">signup</a>

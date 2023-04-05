@@ -21,5 +21,7 @@ public class WelcomeController {
 	@GetMapping("")
 	public String welcome() {
 		return "/html/index";
-	}	
+	}
+	
+	
 }

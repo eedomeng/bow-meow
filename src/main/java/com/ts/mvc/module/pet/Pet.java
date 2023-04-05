@@ -33,6 +33,8 @@ public class Pet {
 	private String petBirthdate; // 생일
 	private String breed; // 종
 	private String petNumber; // 동물고유번호
+	
+	private Double weight;
 
 	private Boolean gender;
 	private Boolean isNeutered;
