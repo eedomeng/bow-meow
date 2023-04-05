@@ -37,7 +37,6 @@ public class PetStatus {
 	private Integer walkTime;
 	private Integer walkDistance;
 	private Integer treat;
-	private Double weight;
 
 	@Column(columnDefinition = "timestamp default now()")
 	private LocalDateTime regDate;

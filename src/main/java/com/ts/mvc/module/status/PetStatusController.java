@@ -20,10 +20,10 @@ import com.ts.mvc.module.user.User;
 @RequestMapping("status")
 public class PetStatusController {
 
-	private final  PetStatusService petStatusService;
+	private final  PetStatusScheduleService petStatusService;
 	
 	// 생성자를 만들어서 의존성 주입
-	public PetStatusController(PetStatusService petStatusService) {
+	public PetStatusController(PetStatusScheduleService petStatusService) {
 		this.petStatusService = petStatusService;
 	}
 
