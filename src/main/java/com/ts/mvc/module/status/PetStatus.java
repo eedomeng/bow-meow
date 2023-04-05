@@ -38,10 +38,7 @@ public class PetStatus {
 	private Integer walkDistance;
 	private Integer treat;
 	private Double weight;
-	
-	private String todoList;
-	private String todoDate;
-	
+
 	@Column(columnDefinition = "timestamp default now()")
 	private LocalDateTime regDate;
 	
