@@ -9,7 +9,7 @@ var RAOF = ((parseInt(weight) * 1000) * 0.02);
 // console.log(RAOF);
 
 window.onload = () => {
-    // URL 파라미터 값 받아오기
+  // URL 파라미터 값 받아오기
   const getParams = new URLSearchParams(location.search);
   for (const param of getParams) {
     console.log(param);
@@ -96,6 +96,7 @@ window.onload = () => {
 
 // 타이머
 var time = 0;
+let walkTime = 0; // 초
 var running = 0;  // 0은 멈춤, 1은 실행중
 var timerid = 0;
 let walking;
@@ -223,6 +224,11 @@ function update() {
 }
 
 function reset() {
+  walkTime = time;
+  console.log(walkTime);
+
+  postData(); // time 초기화 전에 실행
+
   running = 0;
   time = 0;
   clearTimeout(timerid);
@@ -241,7 +247,7 @@ function reset() {
   // resultMap();
 
 
-  postData();
+
 
 
 
@@ -425,18 +431,26 @@ function locationCalculator() {
 
 function postData() {
 
+  const path = window.location.pathname;
+  let pageOwnerArr = path.split('/');
+  let pageOwner = pageOwnerArr[2];
+
   let td = (totalDistance.toFixed(2)).toString();
 
-  const data = { TTD: td };
 
-  fetch('http://localhost:8080/blog', {
+  const data = {
+    TTD: td,
+    walkTime: walkTime
+  };
+
+  fetch(`http://localhost:8080/blog/${pageOwner}`, {
     method: 'POST', // 또는 'PUT'
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
   })
-    .then((response) => response.json())
+    .then((response) => response)
     .then((data) => {
       console.log('성공:', data);
     })
@@ -447,7 +461,4 @@ function postData() {
 
 }
 
-
-
-// 급수, 급식, 몸무게 비동기 전송
 
