@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -30,12 +31,22 @@ public class PetStatus {
 	@GeneratedValue
 	private Long statusIdx;
 	
+	@Column(columnDefinition = "timestamp default now()")
 	private String chosenDate;
 	
+	@ColumnDefault("0")
 	private Integer food;
+	
+	@ColumnDefault("0")
 	private Integer water;
+	
+	@ColumnDefault("0")
 	private Integer walkTime;
+	
+	@ColumnDefault("0")
 	private Integer walkDistance;
+	
+	@ColumnDefault("0")
 	private Integer treat;
 
 	@Column(columnDefinition = "timestamp default now()")
