@@ -14,7 +14,11 @@ var username = $("#authentication.principal.userId");
 var stompClient = null;
 	
 	function connect() {
-	    var socket = new SockJS('/gs-guide-websocket');
+	    const socket = new SockJS('http://localhost:8080/gs-guide-websocket', {
+							    transports: ['websocket'],
+							    iframe: true
+							});
+
 	    stompClient = Stomp.over(socket);
 	    
 	    stompClient.connect({}, function (frame) {
@@ -37,7 +41,7 @@ var stompClient = null;
 	function sendMessage() {
 		let message = msg.value;
 		
-	    stompClient.send("/app/chatting/" + '[[${chatmember}]]', {}, JSON.stringify({'message':message}));
+	    stompClient.send("/app/chat-room/" + '[[${chatmember}]]', {}, JSON.stringify({'message':message}));
 	}
 	
 	connect();
