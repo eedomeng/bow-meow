@@ -92,6 +92,7 @@ public class SecurityConfig {
 		http.csrf().ignoringAntMatchers("/guestbook/upload");
 		http.csrf().ignoringAntMatchers("/guestbook/update");
 		http.csrf().ignoringAntMatchers("/guestbook/delete");
+		http.csrf().ignoringAntMatchers("/diary/upload");
 		//http.csrf().disable().cors(); // ajax 사용하면서 put 오류나는거때문에... 삭제해야함
 		return http.build();
 	}
