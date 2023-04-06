@@ -44,7 +44,7 @@ public class PetStatus {
 	private Integer walkTime;
 	
 	@ColumnDefault("0")
-	private Integer walkDistance;
+	private Double walkDistance;
 	
 	@ColumnDefault("0")
 	private Integer treat;
