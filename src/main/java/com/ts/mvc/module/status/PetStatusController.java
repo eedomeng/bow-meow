@@ -32,6 +32,8 @@ public class PetStatusController {
 	public PetStatusController(PetEventService petEventService) {
 		this.petEventService = petEventService;
 	}
+	
+	//제발요
 
 	@GetMapping("")
 	public String statusUpdate(HttpServletRequest request, Model model, PetStatusDto petStatus) {
