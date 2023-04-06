@@ -52,7 +52,7 @@
     <script src="../assets/js/pet-list.js"></script>
 	
 	<!-- chatting 스크립트 -->
-	<script defer src="../js/chat.js"></script>
+	<!-- <script defer src="../js/chat.js"></script> -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 	<link href="/css/welcome/chat-modal.css">
@@ -493,7 +493,7 @@
 														                    alt="avatar 3" style="width: 40px; height: 100%;">
 														                  <input type="text" class="form-control form-control-lg" id="msg"
 														                    placeholder="Type message">
-														                  <button class="btn btn-default ms-3" type="submit" id="button-send" onclick="javascript:sendMessage();"><i class="fas fa-paper-plane"></i></button>
+														                  <button class="btn btn-default ms-3" type="submit" id="button-send" ><i class="fas fa-paper-plane"></i></button>
 														                </div> 
 														
 														              </div>
@@ -565,6 +565,53 @@
 	<!-- / Layout wrapper -->
 	<script type="text/javascript" layout:fragment="script" th:inline="javascript">
 	
+		window.onload=() => {
+		
+		var stompClient = null;
+			
+			function connect() {
+			    const socket = new SockJS('/gs-guide-websocket');
+		
+			    stompClient = Stomp.over(socket);
+			    
+			    stompClient.connect({}, function (frame) {
+			        console.log('Connected: ' + frame);
+			        stompClient.subscribe('/topic/chatting', function (msg) {
+			          	res = JSON.parse(msg.body);
+			          	console.dir(res.message)
+			           	showChat(res.message);
+			        });
+			    });
+			}
+			
+			function disconnect() {
+			    if (stompClient !== null) {
+			        stompClient.disconnect();
+			    }
+			    console.log("Disconnected");
+			}
+			
+			function sendMessage() {
+				let message = msg.value;
+				
+			    stompClient.send("/app/chat-room" , {}, JSON.stringify({'message':message}));
+			}
+			
+			document.getElementById("button-send").addEventListener('click', sendMessage); //onclick 순서가 꼬이게 된다 무조건 addEventListener
+		
+		connect();
+	}; 
+	
+	function showChat(chatMessage) {
+		let chatBox = '<div class="d-flex flex-row justify-content-end">' + '<div>' +
+       '<p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">' + chatMessage  + '</div>' + '</div>';
+		
+		document.getElementById("response").innerHTML += chatBox;
+	}
+	
+		
+	
+	/* connect(); document.addEvnetListner 함수 이용해서*/ 
 	
 	
 	

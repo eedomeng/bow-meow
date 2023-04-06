@@ -5,7 +5,6 @@ let weight=0;
 let treat=0;
 let walkDistance=0;
 
-window.onload = function () {
     function onGeoOk(position) {
         const API_KEY = "aa894e072080726e6c0321cd6036ed0e"; //openweather API키 입력
         const lat = position.coords.latitude;
@@ -86,4 +85,3 @@ var chart = c3.generate({
     }
 });
     
-};
