@@ -59,7 +59,6 @@ public class SecurityConfig {
 		.antMatchers(HttpMethod.GET, "/user/signup", "/user/checkId", "/user/signupimpl/**").permitAll()
 		.antMatchers(HttpMethod.POST,"/user/signup").permitAll()
 		.antMatchers(HttpMethod.POST, "/mail").permitAll()
-//		.antMatchers(HttpMethod.GET,"/board/list", "/board/detail", "/board/download").permitAll()
 //		.antMatchers(HttpMethod.GET, "/admin").hasAuthority("ROLE_ADMIN")
 		.anyRequest().authenticated();
 		
@@ -67,7 +66,7 @@ public class SecurityConfig {
 			.loginPage("/user/login") // get
 			.loginProcessingUrl("/user/login") // post
 			.usernameParameter("userId")
-			.defaultSuccessUrl("/")
+			.defaultSuccessUrl("/index")
 //			.successHandler(authSuccessHandler)
 //			.failureHandler(authFailureHandler)
 			.permitAll()
@@ -92,6 +91,7 @@ public class SecurityConfig {
 		http.csrf().ignoringAntMatchers("/guestbook/upload");
 		http.csrf().ignoringAntMatchers("/guestbook/update");
 		http.csrf().ignoringAntMatchers("/guestbook/delete");
+		http.csrf().ignoringAntMatchers("/diary/upload");
 		//http.csrf().disable().cors(); // ajax 사용하면서 put 오류나는거때문에... 삭제해야함
 		return http.build();
 	}
