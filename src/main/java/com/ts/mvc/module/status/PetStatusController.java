@@ -100,22 +100,22 @@ public class PetStatusController {
 //		
 //     	}
 
-	@PostMapping("")
-	@ResponseBody
-	public String addEvents(@RequestBody List<Map<String, Object>> param) throws Exception {
-
-		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",Locale.KOREA);
-		
-	     for(int i =0; i<param.size(); i++) {
-	     
-	    	 String title =(String) param.get(i).get("title");
-	         String start= (String) param.get(i).get("start");
-	         String end = (String) param.get(i).get("end");
-              
-	     }
-	
-		 return "/html/status";
-}
+//	@PostMapping("")
+//	@ResponseBody
+//	public String addEvents(@RequestBody List<Map<String, Object>> param) throws Exception {
+//
+//		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",Locale.KOREA);
+//		
+//	     for(int i =0; i<param.size(); i++) {
+//	     
+//	    	 String title =(String) param.get(i).get("title");
+//	         String start= (String) param.get(i).get("start");
+//	         String end = (String) param.get(i).get("end");
+//              
+//	     }
+//	
+//		 return "/html/status";
+//}
 //	@PostMapping("")
 //   
 //    public  @ResponseBody List<Map<String,Object>> getEvent(){
