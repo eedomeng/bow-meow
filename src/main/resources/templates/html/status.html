@@ -25,12 +25,12 @@
 <link rel="stylesheet" href="../assets/css/status.css">
 
 <!-- Load c3.css -->
-	<link href="../assets/c3/c3-0.7.20/c3-0.7.20/c3.css" rel="stylesheet">
+   <link href="../assets/c3/c3-0.7.20/c3-0.7.20/c3.css" rel="stylesheet">
 
-	<!-- Load d3.js and c3.js -->
-	<!-- <script src="/path/to/d3.v5.min.js" charset="utf-8"></script> -->
-	<script src="https://d3js.org/d3.v5.min.js"></script>
-	<script src="../assets/c3/c3-0.7.20/c3-0.7.20/c3.min.js"></script>
+   <!-- Load d3.js and c3.js -->
+   <!-- <script src="/path/to/d3.v5.min.js" charset="utf-8"></script> -->
+   <script src="https://d3js.org/d3.v5.min.js"></script>
+   <script src="../assets/c3/c3-0.7.20/c3-0.7.20/c3.min.js"></script>
 
    <!-- fullcalendar 스크립트 
 
@@ -44,6 +44,8 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
 
+  <!-- jQuery 라이브러리 추가 -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
 </head>
 
 <body>
@@ -124,59 +126,59 @@
                </div>
                  
             </div>
-       </div>	
+       </div>   
        
        <br>
                    
-                 	<div class="easy-checker card col-9">			
-			        	<h4 id="easy-checker-title">Daily checker</h4>
-								
+                    <div class="easy-checker card col-9">         
+                    <h4 id="easy-checker-title">Daily checker</h4>
+                        
                    <form action="/status" method="get" >
                    
                    <div>
                  <div class="input-group">
-				   <span class="input-group-text" id="basic-addon1">Food</span>
-					<input name="food" type="number" min="0" class="form-control"
-						   placeholder="g 단위로 입력하세요" aria-describedby="button-addon2"/>
-				</div>
-				
+               <span class="input-group-text" id="basic-addon1">Food</span>
+               <input name="food" type="number" min="0" class="form-control"
+                     placeholder="g 단위로 입력하세요" aria-describedby="button-addon2"/>
+            </div>
+            
                   <br>
-               	<div class="input-group">
-				  <span class="input-group-text" id="basic-addon1">Water</span>
-				  <input name="water" type="number" min="0" class="form-control"
-	                     placeholder="ml 단위로 입력하세요" aria-describedby="button-addon2"/>
-			    </div> 
+                  <div class="input-group">
+              <span class="input-group-text" id="basic-addon1">Water</span>
+              <input name="water" type="number" min="0" class="form-control"
+                        placeholder="ml 단위로 입력하세요" aria-describedby="button-addon2"/>
+             </div> 
                   <br>
                   
-				     <div class="input-group">
+                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon1">Take a Walk</span>
-					<input name="walk" type="number" min="0" class="form-control"
-						   placeholder="km 단위로 입력하세요" aria-describedby="button-addon2"/>
-				   </div>
+               <input name="walk" type="number" min="0" class="form-control"
+                     placeholder="km 단위로 입력하세요" aria-describedby="button-addon2"/>
+               </div>
                   <br>
                   
                     <div class="input-group">
                     <span class="input-group-text" id="basic-addon1">Treat</span>
-					<input name="treat" type="number" min="0" class="form-control"
-						   placeholder="숫자(횟수)로 입력하세요" aria-describedby="button-addon2"/>
-				   </div>
-				   <br>
-				   
-                	<div class="input-group">
-					  <span class="input-group-text" id="basic-addon1">Weight</span>
-					  <input name="weight" type="number" min="0" class="form-control"
-							 placeholder="kg 단위로 입력하세요" aria-describedby="button-addon2"/>
-					   </div>
+               <input name="treat" type="number" min="0" class="form-control"
+                     placeholder="숫자(횟수)로 입력하세요" aria-describedby="button-addon2"/>
+               </div>
+               <br>
+               
+                   <div class="input-group">
+                 <span class="input-group-text" id="basic-addon1">Weight</span>
+                 <input name="weight" type="number" min="0" class="form-control"
+                      placeholder="kg 단위로 입력하세요" aria-describedby="button-addon2"/>
+                  </div>
                           <br>
                           
             <div class="easy-checker-btn">
-			  <button class="btn btn-outline-primary" type="submit" id="button-addon2">💾&nbsp<b>기록하기</b> <i class="fa-solid fa-plus"></i></button>
-			</div>
-			</div>
-			</form>
+           <button class="btn btn-outline-primary" type="submit" id="button-addon2">💾&nbsp<b>기록하기</b> <i class="fa-solid fa-plus"></i></button>
+         </div>
+         </div>
+         </form>
                   <br>
                   <br>
-				 
+             
             </div>
             </div>
             
@@ -185,18 +187,18 @@
            <!-- chart start -->
                   <div class=chart>
   
-						<div class="main-contents2 col-9" id="third-area">
-							<div class="day-graph card col-9">
-								<h4 id="easy-checker-title">오늘 두콩이는 이만큼 먹고 마셨다.</h4>
+                  <div class="main-contents2 col-9" id="third-area">
+                     <div class="day-graph card col-9">
+                        <h4 id="easy-checker-title">오늘 두콩이는 이만큼 먹고 마셨다.</h4>
                                    <div class="chart-wrapper">
-				                    <div id="total-chart">
-										<!-- 차트 공간 -->
-									</div>
-								</div>
-							</div>
-					    </div>
-					    </div>
-				 <!-- chart fin-->
+                                <div id="total-chart">
+                              <!-- 차트 공간 -->
+                           </div>
+                        </div>
+                     </div>
+                   </div>
+                   </div>
+             <!-- chart fin-->
         
                <!-- Footer -->
                <footer class="content-footer footer bg-footer-theme">
@@ -245,8 +247,9 @@
 
 // caledar를 전역변수로 선언해서 어디서든 쓸 수 있게 하기 
    var calendar= null;
+   var localeSelectorEl = document.getElementById('locale-selector');
 
-  document.addEventListener('DOMContentLoaded', function() {
+  $(document).ready(function() {
     var calendarEl = document.getElementById('calendar');
 
     // 캘린더에 값주기 
@@ -256,10 +259,15 @@
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
       },
-      initialDate: '2023-04-07',
+      initialDate: '2023-04-17',
       navLinks: true, // can click day/week names to navigate views
       selectable: true,
+      editable: true,
       selectMirror: true,
+      droppable: true, 
+      eventAdd: function () { // 이벤트가 추가되면 발생하는 이벤트
+                            console.log()
+                        },
       // 일정추가하기 기능 
       select: function(arg) {
     	  // 프롬프트로 추가가능 
@@ -280,7 +288,7 @@
   
           // for문을 돌린다. allEvent의 길이만큼 i를 돌린다. 
           for(var i =0; i <allEvent.length; i++ ){
-          // obj 객체에 담는다. 
+          // obj 객체에 json을 담는다. 
 	       var obj = new Object();
 	  
 	        // 디비에 저장할 내용
@@ -299,7 +307,7 @@
 
         $(function saveData(jsondata) {
               $.ajax({
-               url: "/status",
+               url: "/html/status",
                method: "POST",
               dataType: "json",
               data: JSON.stringify(events),
@@ -309,10 +317,10 @@
                    alert(result);
                     })
                   .fail(function (request, status, error) {
-                  alert("에러 발생" + error);
+                      alert("에러 발생" + error);
                     });
                  calendar.unselect()
-                            });
+           });
       },
       // 삭제기능
       eventClick: function(arg) {
@@ -346,6 +354,7 @@
 	  
 	//   // 디비에 저장할 내용
 	//  obj.title= allEvent[i]._def.title // 이벤트 명칭 출력
+	//  obj.allday= allEvent[i]._def.allDay // 하루 종일의 이벤트인지 알려주는 boolean 값 (true,false)
 	//  obj.start= allEvent[i]._instance.range.start; // 이벤트 시작 시간 및 날짜
 	//  obj.end= allEvent[i]._instance.range.end; // 이벤트 종료 시간 및 날짜
   
@@ -360,7 +369,6 @@
   // savedata(jsondata);
   
 //}
-
   
 </script>
 </body>

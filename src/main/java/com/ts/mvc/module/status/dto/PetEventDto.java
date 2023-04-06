@@ -10,18 +10,18 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class PetStatusScheduleDto {
+public class PetEventDto {
 	
 	// 어떤 값을 사용할지
-	private Long scheduleIdx; // pk값
+	private Long eventIdx; // pk값
 	private String title;
 	private LocalDateTime start;
 	private LocalDateTime end;
 	private Pet pet;
     private User user;
 	
-	public PetStatusScheduleDto(Long scheduleIdx, String title, LocalDateTime start, LocalDateTime end, Pet pet, User user) {
-		this.scheduleIdx = scheduleIdx;
+	public PetEventDto(Long eventIdx, String title, LocalDateTime start, LocalDateTime end, Pet pet, User user) {
+		this.eventIdx = eventIdx;
 		this.title = title;
 		this.start = start;
 		this.end = end;
@@ -32,7 +32,7 @@ public class PetStatusScheduleDto {
 
 	@Override
 	public String toString() {
-		return "PetStatusScheduleDto [scheduleIdx=" + scheduleIdx + ", title=" + title + ", start=" + start + ", end="
+		return "PetEventDto [eventIdx=" + eventIdx + ", title=" + title + ", start=" + start + ", end="
 				+ end + ", pet=" + pet + ", user=" + user + "]";
 	}
 	

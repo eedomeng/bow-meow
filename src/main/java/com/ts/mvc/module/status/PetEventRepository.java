@@ -1,12 +1,19 @@
 package com.ts.mvc.module.status;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface PetStatusScheduleRepository extends JpaRepository<PetStatusSchedule, Long>{
+import com.ts.mvc.module.user.User;
 
-	//PetStatusSchedule deleteBySchedule(PetStatusSchedule dto);
+@Repository
+public interface PetEventRepository extends JpaRepository<PetEvent, Long>{
 	                                                   // <entity, id값의 데이터 타입>
-
+    //저장
+	PetEvent save(PetEvent petEvent);
+	
+	//삭제
+	//void delete(Long eventId);
 }

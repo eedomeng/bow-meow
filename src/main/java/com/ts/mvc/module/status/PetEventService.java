@@ -1,43 +1,60 @@
 package com.ts.mvc.module.status;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ts.mvc.module.pet.Pet;
-import com.ts.mvc.module.user.User;
+import com.ts.mvc.module.status.dto.PetEventDto;
 import com.ts.mvc.module.user.UserRepository;
 
 @Service
 @Transactional(readOnly = true)
-public class PetStatusScheduleService {
+public interface PetEventService {
 	
-	private final PetStatusScheduleRepository petStatusRepository;
-	private final UserRepository userRepository;
+	List<PetEventDto> findAllPetEvent();
+	
+	PetEventDto savePetEvent(PetEventDto petEventDto);
+
+	 // 삭제하기 
+       void delete(Long eventId);
+	
+	
+//	private final UserRepository userRepository;
+//	private final PetEventRepository PetEventRepository;
 	
 	// 의존성 주입 
-	  public PetStatusScheduleService(PetStatusScheduleRepository petStatusRepository, UserRepository userRepository) {
-	        this.petStatusRepository = petStatusRepository;
-			this.userRepository = userRepository;
-	    }
+//	  public PetEventService(PetEventRepository petEventRepository, UserRepository userRepository) {
+//	        this.PetEventRepository = petEventRepository;
+//			this.userRepository = userRepository;
+//	    }
 	  
-	  public PetStatusSchedule createPetStatusSchedule(Long scheduleIdx, String title, LocalDateTime start, LocalDateTime end, Pet pet, User user) {
+	  
+//		@Autowired
+//		private PetEventRepository petEventRepository;
+//		
+//		public PetEvent save(PetEventDto petEventDto) {
+//			
+//			PetEvent petEvent = new PetEvent(); 
+//			
+//			petEvent.setTitle(petEventDto.getTitle());
+//			petEvent.setStart(petEventDto.getStart());
+//		    petEvent.setEnd(petEventDto.getEnd());
+//		    petEvent.setEventIdx(petEventDto.getEventIdx());
+//		    petEvent.setPet(petEventDto.getPet());
+//		    petEvent.setUser(petEventDto.getUser());
+//		    
+//		    return petEventRepository.save(petEvent);
+//		}
+//		
+
+//	  
+//		// 모든 일정 가져오기
+//		public List<PetEvent> getAll(){
+//			return petEventRepository.findAll();
+//			}
 		
-		  PetStatusSchedule petStatusSchedule = new PetStatusSchedule();
-		  
-		  petStatusSchedule.setTitle(title);
-		  petStatusSchedule.setStart(start);
-		  petStatusSchedule.setEnd(end);
-		  petStatusSchedule.setScheduleIdx(scheduleIdx);
-		  petStatusSchedule.setPet(pet);
-		  petStatusSchedule.setUser(user);
-		  
-		  
-		  return petStatusRepository.save(petStatusSchedule);
-		  
-	  }
-	  
 //	  @Transactional
 //	  public PetStatusSchedule createSchedule(PetStatusScheduleDto dto) {
 //		  
@@ -58,12 +75,6 @@ public class PetStatusScheduleService {
 //		  
 //	  }
 	  
-	  // 필요할까..? 아이디별 모든 스케줄 조회면 몰라도 다른 사람꺼도 보이면 좀.. 
-//	  public List<PetStatusSchedule> getallSchedule(){
-//		  return petStatusRepository.findAll(); // 모든 스케줄 정보 조회 
-//	  }
-	  
-	  
 //	//public String uploadSchedule(PetStatusScheduleDto ScheduleDto){
 //	public List<Map<String, Object>> getEventList(){
 //		Map<String, Object> event = new HashMap<String, Object>();
@@ -83,5 +94,20 @@ public class PetStatusScheduleService {
 //		return eventList;
 //	}
 //	
+//	  public PetEvent createPetStatusSchedule(Long eventIdx, String title, LocalDateTime start, LocalDateTime end, Pet pet, User user) {
+//		
+//		  PetEvent petEvent = new PetEvent();
+//		  
+//		  petEvent.setTitle(title);
+//		  petEvent.setStart(start);
+//		  petEvent.setEnd(end);
+//		  petEvent.setEventIdx(eventIdx);
+//		  petEvent.setPet(pet);
+//		  petEvent.setUser(user);
+//		  
+//		  
+//		  return PetEventRepository.save(petEvent);
+//		  
+//	  }
 	
 }
