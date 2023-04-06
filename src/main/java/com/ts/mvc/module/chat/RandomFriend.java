@@ -1,12 +1,29 @@
-//package com.ts.mvc.module.chat;
-//import java.sql.*;
-//import java.util.*;
-//
+
+package com.ts.mvc.module.chat;
+import java.sql.*;
+import java.util.*;
+import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+
+import com.ts.mvc.module.user.dto.Principal;
+
+import lombok.Data;
+
 //public class RandomFriend {
-//
+
 //    private static final String JDBC_URL = "";
-//    private static final String DB_USER = "ts";
-//    private static final String DB_PASSWORD = "123qwe!@#QWE";
+//    private static final String DB_USER = "";
+//    private static final String DB_PASSWORD = "";
+
 //
 //    public static void main(String[] args) {
 //
@@ -38,4 +55,6 @@
 //            e.printStackTrace();
 //        }
 //    }
+
 //}
+
