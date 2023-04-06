@@ -23,15 +23,15 @@ import com.ts.mvc.module.status.dto.PetStatusDto;
 @RequestMapping("status")
 public class PetStatusController {
 	
-	@Autowired
-	private PetEventRepository petEventRepository;
-	private PetEventService petEventService;
+//	@Autowired
+//	private PetEventRepository petEventRepository;
+//	private PetEventService petEventService;
 
 
 	// 생성자를 만들어서 의존성 주입
-	public PetStatusController(PetEventService petEventService) {
-		this.petEventService = petEventService;
-	}
+//	public PetStatusController(PetEventService petEventService) {
+//		this.petEventService = petEventService;
+//	}
 
 	@GetMapping("")
 	public String statusUpdate(HttpServletRequest request, Model model, PetStatusDto petStatus) {
