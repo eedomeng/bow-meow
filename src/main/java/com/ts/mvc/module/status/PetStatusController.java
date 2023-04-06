@@ -27,8 +27,6 @@ public class PetStatusController {
 //	private PetEventRepository petEventRepository;
 //	private PetEventService petEventService;
 
-
-	// 생성자를 만들어서 의존성 주입
 //	public PetStatusController(PetEventService petEventService) {
 //		this.petEventService = petEventService;
 //	}
