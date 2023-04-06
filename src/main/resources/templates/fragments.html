@@ -166,6 +166,7 @@
 			<a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)"> <i class="bx bx-menu bx-sm"></i></a>
 		</div>
 		
+		<th:block sec:authorize="isAuthenticated()">
 		<!-- Search -->
 			<form action="/search">
               <div class="navbar-nav align-items-center">
@@ -180,7 +181,8 @@
                 </div>
               </div>
             </form>
-              <!-- /Search -->
+        <!-- /Search -->
+        </th:block>     
 		
 		<div class="dm flex-row-align-items-center" sec:authorize="!isAuthenticated()" style="display:flex">
 			<a class="dropdown-item" href="/user/login">login</a>

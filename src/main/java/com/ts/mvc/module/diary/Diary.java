@@ -15,6 +15,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.ts.mvc.module.diary.Diary;
+import com.ts.mvc.module.diary.dto.DiaryUploadDto;
 import com.ts.mvc.module.user.User;
 
 import lombok.AllArgsConstructor;
@@ -36,11 +37,12 @@ public class Diary {
 	private String caption;
 	private String postImageUrl; // db에는 저장된 경로만 insert
 	
-	@JoinColumn(name = "userId")
-	@ManyToOne(fetch = FetchType.EAGER) // 이미지를 select하면 조인해서 user정보를 같이 들고옴
-	private User user;
+//	@JoinColumn(name = "userId")
+//	@ManyToOne(fetch = FetchType.EAGER) // 이미지를 select하면 조인해서 user정보를 같이 들고옴
+	private String user;
 	
 	@Column(columnDefinition = "timestamp default now()")
 	private LocalDateTime regDate;
+
 
 }

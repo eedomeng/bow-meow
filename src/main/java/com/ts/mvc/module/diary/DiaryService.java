@@ -50,7 +50,7 @@ public class DiaryService {
 		}
 		
 		// image 테이블에 저장
-		Diary diary = diaryUploadDto.toEntity(imageFileName, userPrincipal.getUser());
+		Diary diary = diaryUploadDto.toEntity(imageFileName, userPrincipal.getUserId());
 		diaryRepository.save(diary);
 		
 //		System.out.println(diaryEntity);
@@ -75,7 +75,7 @@ public class DiaryService {
 	public void removeDiary(Long dyIdx, String principalId) {
 		Diary diary = diaryRepository.findById(dyIdx).orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
-		if(!diary.getUser().getUserId().equals(principalId)) throw new AuthException(ErrorCode.UNAUTHORIZED_REQUEST);
+		if(!diary.getUser().equals(principalId)) throw new AuthException(ErrorCode.UNAUTHORIZED_REQUEST);
 		
 		diaryRepository.delete(diary);
 	}
