@@ -55,18 +55,20 @@ public class SecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		
 		http.authorizeHttpRequests()
-		.antMatchers(HttpMethod.GET, "/").permitAll()
+		.antMatchers(HttpMethod.GET, "/", "/index").permitAll()
 		.antMatchers(HttpMethod.GET, "/user/signup", "/user/checkId", "/user/signupimpl/**").permitAll()
 		.antMatchers(HttpMethod.POST,"/user/signup").permitAll()
 		.antMatchers(HttpMethod.POST, "/mail").permitAll()
 //		.antMatchers(HttpMethod.GET, "/admin").hasAuthority("ROLE_ADMIN")
+		.antMatchers(HttpMethod.POST, "/gs-guide-websocket/**").permitAll()
+		.antMatchers(HttpMethod.GET, "/gs-guide-websocket/**").permitAll()
 		.anyRequest().authenticated();
 		
 		http.formLogin()
 			.loginPage("/user/login") // get
 			.loginProcessingUrl("/user/login") // post
 			.usernameParameter("userId")
-			.defaultSuccessUrl("/index")
+			.defaultSuccessUrl("/")
 //			.successHandler(authSuccessHandler)
 //			.failureHandler(authFailureHandler)
 			.permitAll()
