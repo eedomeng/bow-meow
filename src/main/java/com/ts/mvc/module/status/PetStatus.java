@@ -13,6 +13,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.ts.mvc.module.blog.dto.request.WalkDto;
 import com.ts.mvc.module.pet.Pet;
 import com.ts.mvc.module.user.User;
 
@@ -57,6 +58,14 @@ public class PetStatus {
 	
 	@ManyToOne
 	private Pet pet;
+
+	public static PetStatus createPetStatus(String pageOwnerNickName, WalkDto dto) {
+		
+//		return PetStatus.builder()
+//				.
+		
+		return null;
+	}
 	
 //	@ApiModelProperty(value = "해당 년월일", example = "2022-04-19", required = true)
 //  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")

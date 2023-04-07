@@ -4,6 +4,7 @@ package com.ts.mvc.module.blog;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.security.web.server.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +21,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ts.mvc.module.blog.dto.BlogDto;
 import com.ts.mvc.module.blog.dto.request.WalkDto;
 import com.ts.mvc.module.guestbook.GuestBookService;
-import com.ts.mvc.module.status.dto.PetStatusDto;
-import com.ts.mvc.module.user.UserPrincipal;
 
 import lombok.AllArgsConstructor;
 
@@ -30,8 +29,22 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class BlogController {
    
-   private final GuestBookService guestBookService;
-	
+   private final BlogService blogService;
+   
+
+//   @GetMapping("/{pageOwnerNickName}/getCsrfToken")
+//   @ResponseBody
+//   public CsrfToken getCsrfToken(@PathVariable String pageOwnerNickName, HttpServletRequest request) {
+//	    CsrfToken csrfToken = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
+//	    String token = csrfToken.getToken();
+//	    String headerName = csrfToken.getHeaderName();
+//	    System.out.println("csrfToken는 :"+csrfToken);
+//	    System.out.println("token는 :"+token);
+//	    System.out.println("headerName는 :"+headerName);
+//	    return csrfToken;
+//	}
+   
+   
    @GetMapping("/{pageOwnerNickName}")
    public String update(@PathVariable String pageOwnerNickName, HttpServletRequest request, Model model, BlogDto blog){
 	  System.out.println(pageOwnerNickName + "의 Blog입니다.");
@@ -73,6 +86,11 @@ public class BlogController {
 	   dto.setWalkTime(walkTime);
 	   dto.setUser(pageOwnerNickName);
 	   dto.setPet(requestBody);
+	   
+	   // 1. createPetStatus실행
+	   blogService.createStatus(pageOwnerNickName ,dto);
+	   
+	   // petStatus에 dto
 	   
 	   
 	   
