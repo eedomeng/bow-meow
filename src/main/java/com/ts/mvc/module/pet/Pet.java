@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.ts.mvc.module.pet.dto.PetRegistDto;
 import com.ts.mvc.module.user.User;
 
 import lombok.AllArgsConstructor;
@@ -36,12 +37,26 @@ public class Pet {
 	
 	private Double weight;
 
-	private Boolean gender;
-	private Boolean isNeutered;
+	private String gender;
+	private String neutering;
 
 	private String dogMbti;
 
 	@ManyToOne
 	private User user;
+	
+	public static Pet registPet(PetRegistDto dto, User user) {
+		return Pet.builder()
+				.petName(dto.getPetName())
+				.petBirthdate(dto.getPetBirthdate())
+				.breed(dto.getBreed())
+				.weight(dto.getWeight())
+				.petNumber(dto.getPetNumber())
+				.gender(dto.getGender())
+				.neutering(dto.getNeutering())
+				.dogMbti(dto.getDogMbti())
+				.user(user)
+				.build();
+	}
 
 }

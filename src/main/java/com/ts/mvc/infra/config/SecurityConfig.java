@@ -92,7 +92,7 @@ public class SecurityConfig {
 		http.csrf().ignoringAntMatchers("/guestbook/**/**");
 		http.csrf().ignoringAntMatchers("/blog/**/**");
 		http.csrf().ignoringAntMatchers("/diary/upload");
-		http.csrf().ignoringAntMatchers("/api/upload");
+		http.csrf().ignoringAntMatchers("/api/user");
 		
 		return http.build();
 	}
