@@ -58,6 +58,9 @@
 	<link href="/css/welcome/chat-modal.css">
 	<script defer src="../assets/js/random-chat.js"></script>
 
+	<!--랜덤으로 친구목록 띄우기 스크립트-->
+	<script defer src="../assets/js/random-chat.js"></script>
+
 </head>
 
 <body>
@@ -275,8 +278,13 @@
 												<p class="card-text">#남 #으르렁 #으르렁대 #3살 #사교적</p>
 												<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
 												<p class="card-text" sec:authorize="isAuthenticated()"><button class="btn btn-primary" onclick="" type="button" data-bs-toggle="modal" data-bs-target="#modalScrollable" >실시간 채팅하기</button></p>
-												 
-												 
+												
+
+													<h5>
+													이름 :  ${nickname}<br>
+													아이디 : ${userId}<br>
+													프로필사진 : ${profileImageUrl}
+													</h5>
 												 
 												 <div class="modal fade" id="modalScrollable" tabindex="-1" aria-hidden="true">
 												 <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
