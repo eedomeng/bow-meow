@@ -576,7 +576,7 @@
 			    
 			    stompClient.connect({}, function (frame) {
 			        console.log('Connected: ' + frame);
-			        stompClient.subscribe('/topic/chatting', function (msg) {
+			        stompClient.subscribe('/topic/chatting/'  + [[${cgIdx}]], function (msg) {
 			          	res = JSON.parse(msg.body);
 			          	console.dir(res.message)
 			           	showChat(res.message);
@@ -594,7 +594,7 @@
 			function sendMessage() {
 				let message = msg.value;
 				
-			    stompClient.send("/app/chat-room" , {}, JSON.stringify({'message':message}));
+			    stompClient.send("/app/chat-room/" + [[${cgIdx}]] , {}, JSON.stringify({'message':message}));
 			}
 			
 			document.getElementById("button-send").addEventListener('click', sendMessage); //onclick 순서가 꼬이게 된다 무조건 addEventListener
