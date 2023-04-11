@@ -34,15 +34,6 @@ public class SecurityConfig {
 	private final UserDetailsService userDetailsService;
 	private final OAuth2DetailsService oAuth2DetailsService;
 	
-//	@Override
-//	protected void configure(HttpSecurity http) throws Exception {
-//		http 
-//			.authorizeRequests()
-//			.antMatchers("/**").permitAll()
-//			.and()
-//			.cors();
-//	}
-//	
 	@Bean
 	public PersistentTokenRepository tokenRepository() {
 		JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();

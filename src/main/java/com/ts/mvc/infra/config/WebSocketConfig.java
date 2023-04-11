@@ -41,28 +41,5 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     .setClientLibraryUrl("https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.min.js");
   }
   
-  @Override
-  public void configureClientInboundChannel(ChannelRegistration registration) {
-      registration.interceptors(new ChannelInterceptor() {
-          @Override
-          public Message<?> preSend(Message<?> message, MessageChannel channel) {
-              StompHeaderAccessor accessor =
-                      MessageHeaderAccessor.getAccessor(message, StompHeaderAccessor.class);
-
-              if (StompCommand.CONNECT.equals(accessor.getCommand())) {
-                  String user = accessor.getFirstNativeHeader("user");
-                  if (user != null) {
-                      List<GrantedAuthority> authorities = new ArrayList<>();
-                      authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-                      Authentication auth = new UsernamePasswordAuthenticationToken(user, user, authorities);
-                      SecurityContextHolder.getContext().setAuthentication(auth);
-                      accessor.setUser(auth);
-                  }
-              }
-
-              return message;
-          }
-      });
-  }
 
 }

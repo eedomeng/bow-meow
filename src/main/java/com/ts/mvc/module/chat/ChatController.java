@@ -39,13 +39,4 @@ public class ChatController {
 	  }
 
 	 
-
-	 
-//	 @MessageMapping("/chatting/{cgIdx}")
-//	 public void message(ChatRequest message, @DestinationVariable Long cgIdx, Principal principal) {
-//		 cgIdx = chatService.findChatGroupIdxByUserId();
-//		 System.out.println(cgIdx);
-//	     simpMessagingTemplate.convertAndSend("/topic/chatting/" + cgIdx, message);
-//	 }
-
 }

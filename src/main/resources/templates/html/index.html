@@ -265,56 +265,49 @@
 					</div>
 				</div>
 						</div>
+					</div>
 						<!-- AI 답변 영역 종료 -->
 						<!-- Chat GPT Area End -->
 
-						<!-- 실시간 채팅 & 산책버튼 Start -->
+						<!-- 실시간 채팅 & 친구추천 Start -->
+						<div class="justify-content-center">
 						<div class="container-xxl flex-grow-1 container-p-y">
-						<div class="row sub-contents" sec:authorize="isAuthenticated()">
+							<div class="row sub-contents justify-content-center" sec:authorize="isAuthenticated()">
 							<div class="col-8">
 								<div class="card">
 								 <br>
 									<p class="card-text h1" style= "text-align:center">Take a walk with me!</p>
 									<div class="row g-0">
-										<div class="card-body col-4">
+										<div class="card-body col-4 justify-content-center">
+										<!-- image slide start -->
 										<div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+											  <div class="carousel-inner">
 											  <ol class="carousel-indicators">
 												<li data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></li>
 												<li data-bs-target="#carouselExample" data-bs-slide-to="1"></li>
 												<li data-bs-target="#carouselExample" data-bs-slide-to="2"></li>
 											  </ol>
-											  <div class="carousel-inner">
 												<div class="carousel-item active">
-												  <img class="d-block w-100" src="../assets/img/elements/13.jpg" alt="First slide" />
-												  <div class="carousel-caption d-none d-md-block">
-													<h3>이름 :  ${nickname}</h3>
-													<p>
-													아이디 : ${userId}<br>
-													프로필사진 : ${profileImageUrl}
-													</p>
+												  <img class="d-block w-100" src="../assets/img/elements/22.jpg" alt="First slide" />
+												  <div class="carousel-caption">
+													<h5>이름 :  ${nickname}</h5>
+													<p>mbti : intp</p>
 												  </div>
 												</div>
 												<div class="carousel-item">
-												  <img class="d-block w-100" src="../assets/img/elements/2.jpg" alt="Second slide" />
+												  <img class="d-block w-100" src="../assets/img/elements/23.jpg" alt="Second slide" />
 												  <div class="carousel-caption d-none d-md-block">
-													<h3>이름 :  ${nickname}</h3>
-													<p>
-													아이디 : ${userId}<br>
-													프로필사진 : ${profileImageUrl}
-													</p>
+													<h5>이름 :  ${nickname}</h5>
+													<p>mbti :  enfp</p>
 												  </div>
 												</div>
 												<div class="carousel-item">
-												  <img class="d-block w-100" src="../assets/img/elements/18.jpg" alt="Third slide" />
+												  <img class="d-block w-100" src="../assets/img/elements/25.jpg" alt="Third slide" />
 												  <div class="carousel-caption d-none d-md-block">
-													<h3>이름 :  ${nickname}</h3>
-													<p>
-													아이디 : ${userId}<br>
-													프로필사진 : ${profileImageUrl}
-													</p>
+													<h5>이름 :  ${nickname}</h5>
+													<p>mbti : istj </p>
 												  </div>
 												</div>
-											  </div>
 											  <a class="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 												<span class="visually-hidden">Previous</span>
@@ -323,18 +316,19 @@
 												<span class="carousel-control-next-icon" aria-hidden="true"></span>
 												<span class="visually-hidden">Next</span>
 											  </a>
+											  </div>
 										</div>
+										<!-- image slide end -->
 										
 <!-- 											<img src="../assets/img/testdog/bulldog.png" class="img-fluid rounded-start" alt="#"> -->
 										</div>
-										<div class="col-8">
-											<div class="card-body" >
+										<div class="row g-0">
+											<div class="card-body justify-content-center" style="display:flex">
 												<h5 class="card-title friend-profile"></h5>
 												<p class="card-text"><small class="text-muted"></small></p>
-													
 												<p class="card-text" ><button class="btn btn-primary" id="connection-btn" type="button" data-bs-toggle="modal" data-bs-target="#modalScrollable" >실시간 채팅하기</button></p>
 												
-													<!-- modal 창 시작 -->
+													<!-- chatting modal 창 시작 -->
 												 <div class="modal" id="modalScrollable" tabindex="-1" aria-hidden="true">
 												 <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
 							                          <div class="modal-content" id="modalWindow">
@@ -351,7 +345,6 @@
 														          </div>
 														          <div class="card-body" style="position: relative; height: 400px; overflow: auto;">
 																	<div id="response"></div>
-														
 														          </div> 
 														          <div class="card-footer text-muted d-flex justify-content-space-between align-items-center pe-3 pt-3 mt-2">
 														          <div id="getId" th:text="${#authentication.principal.userId}" hidden></div> 
@@ -360,7 +353,7 @@
 														             <!--   <input type="text" class="form-control form-control-lg" id="targetUserId"
 														               placeholder="userId"> select로 수정 random 회원에 나온 리스트 뿌려주기  -->
 														             <input type="text" class="form-control form-control-lg" id="msg"
-														               placeholder="산책하고 싶은 날짜와 시간을 알려주세요.">
+														               placeholder="산책하고 싶은 친구와 날짜와 시간을 알려주세요.">
 														             <button class="btn btn-default ms-3" type="submit" id="button-send" ><i class="fas fa-paper-plane"></i></button>
 														           </div> 
 														        </div>
@@ -373,19 +366,17 @@
 														  </div>
 														</div>
 														</div>
-               
-                      
-											
+               												<!-- chatting modal 창 시작 -->
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-																																																							</div>
+					</div>
+				</div>
 						<!-- 실시간 채팅 & 산책버튼 End -->
 
-					</div>
       
 					<!-- / Content -->
 
@@ -428,13 +419,13 @@
 		<div class="layout-overlay layout-menu-toggle"></div>
 	<!-- / Layout wrapper -->
 	<script type="text/javascript" layout:fragment="script" th:inline="javascript">
-	
+	/* 채팅방 여는 버튼, websocket connect */
 	  const openButton = document.getElementById('connection-btn');
 	  openButton.addEventListener('click', function() {
 		 connect();
 	    document.getElementById("modalWindow").style.display="block";
 	  });
-	  
+	/* 채팅방 닫는 버튼, websocket disconnect */
 	  const closeButton = document.getElementById('close');
 	  closeButton.addEventListener('click', function() {
 	    disconnect();
@@ -442,7 +433,7 @@
 	    let modalBack = document.getElementById("modalScrollable");
 	    modalBack.setAttribute('aria-hidden', 'false');
 	  });
-	  
+	  /* 현재 로그인한 유저 */
 	var sessionUserId = document.getElementById("getId").textContent;
 	 if (sessionUserId == null) sessionUserId == guest;
 	  
@@ -455,8 +446,8 @@
 		    
 		    stompClient.connect({}, function (frame) {
 		        console.log('Connected: ' + frame);
-		        console.log(frame.headers['user-name'])
-		        console.dir(sessionUserId);
+		       /*  console.log(frame.headers['user-name'])
+		        console.dir(sessionUserId); */
 		        stompClient.subscribe('/topic/chatting', function (msg) {
 		          	res = JSON.parse(msg.body);
 		          	console.dir(res.message)
@@ -477,6 +468,7 @@
 		    console.log("Disconnected");
 		}
 		
+		/* message 보내는 코드 */
 		function sendMessage() {
 			let message = msg.value;
 			/* let userId = targetUserId.value; */
@@ -486,8 +478,6 @@
 		    stompClient.send("/app/chat-room", {}, JSON.stringify({'message':message}));
 		    inputMsg.value=null;
 		    inputMsg.focus;
-		   /*  inputUser.value=null;
-		    inputUser.focus; */
 
 		}
 		
@@ -497,15 +487,13 @@
                 sendMessage();
                 }
 		}
-
+	/* 본인이 보낸 채팅 내용이 보이는 코드 */
 	function showChat(chatMessage,userId) {
-		let imageUrl = '#authentication.principal.profileImageUrl';
-		let imageTag = '<img th:src="${imageUrl}" alt="avatar" style="width: 45px; height: 100%;">';
 		let chatBox = '<div class="d-flex flex-row justify-content-end">' + '<div>' + 
-	 '<p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">' + chatMessage  + '</div>' + imageTag + '</div>' ;
+	 '<p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">' + chatMessage  + '</div>' + sessionUserId + '</div>' ;
 		document.getElementById("response").innerHTML += chatBox;
 	}
-		
+	/* 다른 사람이 보낸 채팅 내용이 보이는 코드 */
 	function recieveChat(chatMessage,userId) {
 		let chatBox = '<div class="d-flex flex-row justify-content-start">' + '<div>' + 
 	 '<p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">' + chatMessage  + '</div>' + '</div>' ;
