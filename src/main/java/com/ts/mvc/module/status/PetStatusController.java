@@ -55,8 +55,9 @@ public class PetStatusController {
 	// 일정 등록
 	@PostMapping("eventUpload")
 	@ResponseBody 
-	public ResponseEntity<Void> addPetEvent(@RequestBody  String content, PetEventDto petEventDto) { // content에 petEventDto를 담는다. 
+	public ResponseEntity<Void> addPetEvent(@RequestBody String content, PetEventDto petEventDto) { // content에 petEventDto를 담는다. 
 		System.out.println(content);
+		
 		petEventService.addPetEvent(petEventDto);
      	System.out.println("확인용");
      	
