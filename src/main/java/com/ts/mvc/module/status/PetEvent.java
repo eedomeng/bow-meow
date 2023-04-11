@@ -43,6 +43,14 @@ public class PetEvent {
 	
 	@ManyToOne //PetEvent :n pet:1
     private Pet pet;
+
+	public static PetEvent createPetEvent(PetEventDto petEventDto) {
+		return PetEvent.builder()
+				       .title(petEventDto.getTitle())
+				       .start(petEventDto.getStart())
+				       .end(petEventDto.getEnd())
+				       .build();
+	}
 	
 	
 

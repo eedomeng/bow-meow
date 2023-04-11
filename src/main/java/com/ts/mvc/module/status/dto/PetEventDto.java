@@ -35,21 +35,6 @@ public class PetEventDto {
 	    this.pet = (Pet) jsonMap.getOrDefault("pet", new Pet());
 	}
 
-    
-//	public PetEventDto(Map<String, Object> jsonMap) throws JsonProcessingException {
-//	    ObjectMapper mapper = new ObjectMapper();
-//	    String jsonString = mapper.writeValueAsString(jsonMap); // writeValueAsString으로 jsonMap을 json으로 문자열 변환
-//	    
-//	    PetEventDto dto = mapper.readValue(jsonString, PetEventDto.class); //readValue 얘를 이용해서 PetEventDto 객체로 변환 
-//	    
-//	    this.eventIdx = dto.getEventIdx();
-//	    this.title = dto.getTitle();
-//	    this.start = dto.getStart();
-//	    this.end = dto.getEnd();
-//	    this.user = dto.getUser();
-//	    this.pet = dto.getPet();
-//	}
-
 	
 	public PetEventDto(Long eventIdx, String title, LocalDateTime start, LocalDateTime end, User user, Pet pet) {
 		this.eventIdx = eventIdx;
