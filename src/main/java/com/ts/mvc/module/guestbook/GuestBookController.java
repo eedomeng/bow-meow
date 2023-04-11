@@ -47,24 +47,6 @@ public class GuestBookController {
 	private final GuestBookService guestBookService;
 	private final GuestBookRepository guestBookRepository;
 	
-	  
-	
-//	@GetMapping("/{pageOwnerNickName}/getCsrfToken")
-//	@ResponseBody
-//	public Map<String, String> getCsrfToken(@PathVariable String pageOwnerNickName, HttpServletRequest request) {
-//	    CsrfToken csrfToken = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
-//	    if (csrfToken != null) {
-//	        System.out.println(csrfToken);
-//	        Map<String, String> response = new HashMap<>();
-//	        response.put("token", csrfToken.getToken());
-//	        return response;
-//	    } else {
-//	        System.out.println("csrfToken" +csrfToken +"입니다.");
-//	        System.out.println("csrfToken" +csrfToken.getToken() +"입니다.");
-//
-//	        return null;
-//	    }
-//	}
 	
 	@GetMapping("/{pageOwnerNickName}")
 	public String guestbook(@PathVariable String pageOwnerNickName, @AuthenticationPrincipal UserPrincipal visitUserId , Model model) {

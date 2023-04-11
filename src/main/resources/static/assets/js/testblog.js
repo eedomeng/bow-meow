@@ -1,34 +1,59 @@
 
-// 전역에 변수 선언
-let water;
-let food;
-let weight;
+// 일일 권장 식사량 계산함수
+function dailyRecommendedMealAmount(weight) {
+  let raof = (parseFloat(weight) * 1000) * 0.02;
+  return raof;
+};
 
-// 일일 권장 식사량
-var RAOF = ((parseInt(weight) * 1000) * 0.02);
-// console.log(RAOF);
-
-window.onload = () => {
-
-
-  // URL 파라미터 값 받아오기
-  const getParams = new URLSearchParams(location.search);
-  for (const param of getParams) {
-    console.log(param);
-  }
-
-  water = getParams.get('water');
-  food = getParams.get('food');
-  weight = getParams.get('weight');
-
-  //받아온 값 세션에 저장
-  // sessionStorage.setItem('water', water);
-  // sessionStorage.setItem('food', food);
-  // sessionStorage.setItem('weight', weight);
+// 일일 권장 급수량 계산함수
+function dailyRecommendedWaterAmount(weight) {
+  let raow = weight * 65;
+  return raow;
+}
 
 
+// 값이 없는 상태의 차트생성함수
+function chartGeneratorZeroValue() {
+  var chart = c3.generate({
+    bindto: '.water-chart',
+    data: {
+      columns: [
+        ['급수량', 0], ['급식량', 0]
+      ],
+      type: 'gauge',
+    },
+    gauge: {
+      min: 0, // 0 is default, //can handle negative min e.g. vacuum / voltage / current flow / rate of change
+      max: 150, // 일일 권장 식사량
+    },
+    color: {
+      pattern: ['#FF0000', '#F97600', '#F6C600', '#60B044'], // the three color levels for the percentage values.
+      threshold: {
+        values: [30, 60, 90, 100]
+      }
+    },
+    size: {
+      height: 250
+    }
+  });
+  sessionStorage.setItem('water', 0);
+  sessionStorage.setItem('food', 0);
+  sessionStorage.setItem('weight', 0.0);
 
-  // 차트생성
+}
+
+
+// 차트생성함수
+function chartGenerator(water, food, weight) {
+
+  // 세션에 저장해둔 water food weight 값 비우기
+  sessionStorage.removeItem('water');
+  sessionStorage.removeItem('food');
+  sessionStorage.removeItem('weight');
+
+  let feedMax = dailyRecommendedMealAmount(weight);
+
+  console.log(water, food, weight);
   var chart = c3.generate({
     bindto: '.water-chart',
     data: {
@@ -38,22 +63,12 @@ window.onload = () => {
       type: 'gauge',
     },
     gauge: {
-      //        label: {
-      //            format: function(value, ratio) {
-      //                return value;
-      //            },
-      //            show: false // to turn off the min/max labels.
-      //        },
       min: 0, // 0 is default, //can handle negative min e.g. vacuum / voltage / current flow / rate of change
-      max: 400, // 일일 권장 식사량
-      //    units: ' %',
-      //    width: 39 // for adjusting arc thickness
+      max: feedMax, // 일일 권장 식사량
     },
     color: {
       pattern: ['#FF0000', '#F97600', '#F6C600', '#60B044'], // the three color levels for the percentage values.
       threshold: {
-        //            unit: 'value', // percentage is default
-        //            max: 200, // 100 is default
         values: [30, 60, 90, 100]
       }
     },
@@ -63,29 +78,76 @@ window.onload = () => {
   });
 
 
-  // 타이머 초기화
-  var clockTarget = document.getElementById("clock");
-  function clock() {
-    var date = new Date();
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var seconds = date.getSeconds();
-    clockTarget.innerText = `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
-  }
+  // water food weight 값 세션에 저장
+  sessionStorage.setItem('water', water);
+  sessionStorage.setItem('food', food);
+  sessionStorage.setItem('weight', weight);
 
-  function init() {
-    clock();
-    setInterval(clock, 1000);
-  }
+
+
+}
+
+// 타이머 초기화
+function clock() {
+  var clockTarget = document.getElementById("clock");
+  var date = new Date();
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var seconds = date.getSeconds();
+  clockTarget.innerText = `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
+}
+
+// 타이머 인터벌 실행
+function init() {
+  clock();
+  setInterval(clock, 1000);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+window.onload = () => {
+
+  // let water = sessionStorage.getItem('water');
+  // let food = sessionStorage.getItem('food');
+  // let weight = sessionStorage.getItem('weight');
+
+  // let waterString = document.getElementById('water').innerText;
+  // let foodString = document.getElementById('food').innerText;
+  // let weightString = document.getElementById('weight').innerText;
+
+  console.log(document.getElementsByClassName('pet-walkTime'));
+
+  const petArr = document.getElementsByClassName('pet-walkTime')
+
+  let waterString = document.getElementById('water').innerText;
+  let foodString = document.getElementById('food').innerText;
+  let weightString = document.getElementById('weight').innerText;
+
+
+
+  let water = parseInt(waterString);
+  let food = parseInt(foodString);
+  let weight = parseInt(weightString);
+
+
+  // 차트 생성함수
+  chartGeneratorZeroValue();
+
+
+  clock();
 
   init();
 
-  // onloadMapRender();
-
-
   kakaoMapCover();
-
-
 
 } // window.onload end
 
@@ -113,16 +175,6 @@ function kakaoMapCover() {
 }
 
 
-// kakao maps 렌더링 전 커버 만들기
-// function onloadMapRender() {
-//   navigator.geolocation.getCurrentPosition(
-//     function (position) {
-//       currentLatitude = position.coords.latitude;
-//       currentLongtitude = position.coords.longitude;
-//     }
-//   )
-//   kakaoMapsRender();
-// }
 
 // kakao maps
 function kakaoMapsRender() {
@@ -237,7 +289,7 @@ function reset() {
   walkTime = time;
   console.log(walkTime);
 
-  postData(); // time 초기화 전에 실행
+  postWalkData(); // time 초기화 전에 실행
 
   running = 0;
   time = 0;
@@ -439,21 +491,34 @@ function locationCalculator() {
 
 
 
-function postData() {
+function postWalkData() {
 
   const path = window.location.pathname;
   let pageOwnerArr = path.split('/');
   let pageOwner = pageOwnerArr[2];
-
   let td = (totalDistance.toFixed(2)).toString();
+
+  // 체크박스 값 받는 로직
+  const petCheckBoxes = document.getElementsByClassName("pet-checkbox");
+  const values = [];
+
+  for (const checkbox of petCheckBoxes) {
+    if (checkbox.checked) values.push(checkbox.defaultValue);
+    console.log(values);
+    console.log(petCheckBoxes);
+  };
+
 
 
   const data = {
     TTD: td,
-    walkTime: walkTime
+    walkTime: walkTime,
+    petNameList: values
   };
 
-  fetch(`http://localhost:8080/blog/${pageOwner}`, {
+  console.log(data.TTD);
+
+  fetch(`http://localhost:8080/blog/${pageOwner}/walk`, {
     method: 'POST', // 또는 'PUT'
     headers: {
       'Content-Type': 'application/json',
@@ -468,7 +533,70 @@ function postData() {
       console.error('실패:', error);
     });
 
-
 }
 
 
+
+
+function postFeedData(water, food, weight) {
+  const path = window.location.pathname;
+  let pageOwnerArr = path.split('/');
+  let pageOwner = pageOwnerArr[2];
+
+  // 체크박스 값 받는 로직
+  const petCheckBoxes = document.getElementsByClassName("pet-Feed-checkbox");
+  const values = [];
+
+  // console.log(petCheckBoxes);
+
+  for (const checkbox of petCheckBoxes) {
+    if (checkbox.checked) values.push(checkbox.defaultValue);
+    // console.log(values);
+    // console.log(petCheckBoxes);
+  };
+
+  const feedData = {
+    water: water,
+    food: food,
+    weight: weight,
+    petNameList: values
+  }
+
+
+  fetch(`http://localhost:8080/blog/${pageOwner}/food`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(feedData),
+  })
+    .then((response) => response)
+    .then((data) => {
+      console.log('food POST 성공:', data);
+    })
+    .catch((error) => {
+      console.error('food POST 실패:', error);
+    });
+
+}
+
+const feedDataForm = document.getElementById("feedDataForm");
+feedDataForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(feedDataForm);
+
+  const water = formData.get('water');
+  const food = formData.get('food');
+  const weight = formData.get('weight');
+
+  dailyRecommendedMealAmount(weight);
+  const chartDescription = document.getElementById('chart-description');
+  chartDescription.innerText = `현재 체중에 권장되는 급식량은 ${dailyRecommendedMealAmount(weight)}g입니다.`
+
+  chartGenerator(water, food, weight);
+
+  postFeedData(water, food, weight);
+
+
+});

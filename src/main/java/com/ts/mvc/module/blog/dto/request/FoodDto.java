@@ -1,24 +1,17 @@
-package com.ts.mvc.module.blog.dto;
+package com.ts.mvc.module.blog.dto.request;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class BlogDto {
+public class FoodDto {
 
-	private String water;
-	private String food;
-	private String weight;
-	private String totalDistance;
-	
-	public BlogDto(String water, String food, String weight, String totalDistance) {
-		this.water = water;
-		this.food = food;
-		this.weight = weight;
-		this.totalDistance = totalDistance;
-	}
-
+	private int water;
+	private int food;
+	private double weight;
+	private String petName;
+	private String userId;
 	
 	
 }
