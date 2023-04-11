@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Principal implements Serializable{ // 인증이 끝난 정보를 담기 위한
 
+	
 	private String userId;
 	private String password;
 	private String email;
