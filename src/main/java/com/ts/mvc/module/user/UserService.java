@@ -109,6 +109,17 @@ public class UserService implements UserDetailsService{
 //		Path imageFilePath = Paths.get(uploadFoler + imageFileName);
 		return null;
 	}
+
+	@Transactional
+	public void removeUser(String userDelId) {
+		User user = userRepository.findById(userDelId).orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+		
+		if (userDelId == null) {
+            throw new RuntimeException("로그인 유저 정보가 없습니다.");
+        }
+		
+		userRepository.delete(user);
+	}
 	
 
 }

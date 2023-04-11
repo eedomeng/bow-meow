@@ -41,6 +41,7 @@ public class UserControllerTest {
 		form.setEmail("domeng@naver.com");
 		form.setNickname("해피");
 		form.setGrade("ROLE_ADMIN");
+		form.setProfileImageUrl("https://ifh.cc/g/xLrPyz.jpg");
 		
 		mockMvc.perform(get("/user/signupimpl/1234")
 				.sessionAttr("signupForm", form)
@@ -57,6 +58,7 @@ public class UserControllerTest {
 		form.setEmail("chlghrms2@naver.com");
 		form.setNickname("호구닝");
 		form.setGrade("ROLE_ADMIN");
+		form.setProfileImageUrl("https://ifh.cc/g/xLrPyz.jpg");
 		
 		mockMvc.perform(get("/user/signupimpl/1234")
 				.sessionAttr("signupForm", form)

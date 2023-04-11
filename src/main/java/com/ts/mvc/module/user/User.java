@@ -3,6 +3,7 @@ package com.ts.mvc.module.user;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -39,7 +40,7 @@ public class User {
 	private String profileImageUrl;
 	private String grade;
 
-	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnoreProperties({"user"}) // JPA 무한참조 방지
     private List<Pet> pets;
 	
@@ -54,7 +55,7 @@ public class User {
 	// User를 Select할 때 해당 User Id로 등록된 image들을 다 가져온다.
 	// Lazy = User를 Select할 때 해당 User Id로 등록된 image들을 안가져옴, 대신 getImages() 함수의 image들이 호출될 때 가져옴
 	// Eager = User를 Select할 때 해당 User Id로 등록된 image들을 전부 Join해서 가져옴 
-	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnoreProperties({"user"}) // JPA 무한참조 방지
 	private List<Diary> images;
 

@@ -71,7 +71,7 @@
 	            </form>
 		        
 		        <img
-		          src="#"
+		          th:src="${#authentication.principal.profileImageUrl}"
 		          alt="user-avatar"
 		          class="d-block rounded"
 		          height="100"
@@ -160,19 +160,9 @@
                           <p class="mb-0">Once you delete your account, there is no going back. Please be certain.</p>
                         </div>
                       </div>
-                      <form id="formAccountDeactivation_tt" onsubmit="return false">
-                        <div class="form-check mb-3">
-                          <input
-                            class="form-check-input"
-                            type="checkbox"
-                            name="accountActivation"
-                            id="accountActivation"
-                          />
-                          <label class="form-check-label" for="accountActivation"
-                            >I confirm my account deactivation</label
-                          >
-                        </div>
-                        <button type="submit" class="btn btn-danger deactivate-account">Deactivate Account</button>
+                      <form th:action="@{/user/remove}" method="post">
+                      	<input type="hidden" th:value="${#authentication.principal.userId}" name="userDelId">
+                        <button id="btnDel" class="btn btn-danger deactivate-account">Deactivate Account</button>
                       </form>
                     </div>
                   </div>
@@ -271,6 +261,8 @@
 		  pwCheck.innerHTML = "비밀번호가 같지않습니다.";
 		  return false;
 	  } 
+	  
+	  console.log(data);
 	  
 	  const confirmCheck = confirm("수정하시겠습니까?");
 	  
